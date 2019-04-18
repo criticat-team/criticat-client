@@ -4,7 +4,7 @@ const categoryIds = categories.map(cat => cat.id)
 
 export default function(ctx) {
   const category = ctx.params.category
-  if (category !== null && !categoryIds.includes(category)) {
+  if (category !== undefined && !categoryIds.includes(category)) {
     ctx.redirect('/')
   }
 }
