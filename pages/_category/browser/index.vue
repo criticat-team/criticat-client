@@ -20,7 +20,7 @@ import categories from '@/assets/js/categories'
 export default {
   data() {
     return {
-      categories: categories
+      categories
     }
   },
   asyncData({ params }) {
