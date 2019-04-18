@@ -31,11 +31,16 @@ export default {
   data() {
     return {
       drawer: false,
-      items: categories.map(category => {
+      items: categories.map(({ icon, title, id }) => {
         return {
-          icon: category.icon,
-          title: category.title,
-          to: '/' + category.id
+          icon,
+          title,
+          to: {
+            name: 'category',
+            params: {
+              category: id
+            }
+          }
         }
       }),
       title: 'Criticat'
