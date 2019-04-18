@@ -1,4 +1,4 @@
-import categories from '@/assets/categories'
+import categories from '@/assets/js/categories'
 
 const categoryIds = categories.map(cat => cat.id)
 

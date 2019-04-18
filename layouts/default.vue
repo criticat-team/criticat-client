@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import categories from '@/assets/categories'
+import categories from '@/assets/js/categories'
 
 export default {
   data() {
