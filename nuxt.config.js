@@ -25,6 +25,13 @@ export default {
   },
 
   /*
+   ** Router options
+   */
+  router: {
+    middleware: 'categories'
+  },
+
+  /*
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
