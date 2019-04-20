@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-if="isMobile" v-model="drawer" fixed app>
+    <v-navigation-drawer
+      v-if="isMounted && $vuetify.breakpoint.xsOnly"
+      v-model="drawer"
+      fixed
+      app
+    >
       <v-list>
         <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router>
           <v-list-tile-action>
@@ -13,11 +18,14 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar dark color="primary" app flat height="64">
-      <v-toolbar-side-icon v-if="isMobile" @click="drawer = !drawer" />
+      <v-toolbar-side-icon
+        v-if="isMounted && $vuetify.breakpoint.xsOnly"
+        @click="drawer = !drawer"
+      />
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-tabs
-        v-if="!isMobile"
+        v-if="isMounted && !$vuetify.breakpoint.xsOnly"
         icons-and-text
         dark
         color="transparent"
@@ -60,13 +68,12 @@ export default {
           }
         }
       }),
-      title: 'Criticat'
+      title: 'Criticat',
+      isMounted: false
     }
   },
-  computed: {
-    isMobile() {
-      return this.isMounted && this.$vuetify.breakpoint.xsOnly
-    }
+  mounted() {
+    this.isMounted = true
   }
 }
 </script>
