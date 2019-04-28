@@ -16,7 +16,5 @@
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
   "vetur.validation.template": true,
-  "vetur.format.defaultFormatter.html": "prettier",
-  "prettier.trailingComma": "all",
-  "prettier.singleQuote": true
+  "vetur.format.defaultFormatter.html": "prettier"
 }
