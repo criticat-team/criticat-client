@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import categories from '@/assets/js/categories'
+import categories from '@/assets/js/categories';
 
 export default {
   data() {
@@ -38,13 +38,13 @@ export default {
           to: {
             name: 'category',
             params: {
-              category: id
-            }
-          }
-        }
+              category: id,
+            },
+          },
+        };
       }),
-      title: 'Criticat'
-    }
-  }
-}
+      title: 'Criticat',
+    };
+  },
+};
 </script>

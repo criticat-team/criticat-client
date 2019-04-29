@@ -1,9 +1,7 @@
 <template>
   <div>
     <h1>{{ category }} home</h1>
-    <v-btn color="primary" flat nuxt :to="{ name: 'category-browser' }">
-      Go to browser
-    </v-btn>
+    <v-btn color="primary" flat nuxt :to="{ name: 'category-browser' }">Go to browser</v-btn>
   </div>
 </template>
 
@@ -11,8 +9,8 @@
 export default {
   asyncData({ params }) {
     return {
-      category: params.category
-    }
-  }
-}
+      category: params.category,
+    };
+  },
+};
 </script>

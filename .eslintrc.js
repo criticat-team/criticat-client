@@ -8,16 +8,16 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: [
+    'airbnb',
     '@nuxtjs',
     'plugin:nuxt/recommended',
     'plugin:prettier/recommended',
     'prettier',
     'prettier/vue'
   ],
-  plugins: [
-    'prettier'
-  ],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {
+    'prefer-destructuring': 0
   }
-}
+};

@@ -8,25 +8,24 @@
       flat
       nuxt
       :to="{ name: 'category-browser', params: { category: category.id } }"
+      >{{ category.title }}</v-btn
     >
-      {{ category.title }}
-    </v-btn>
   </div>
 </template>
 
 <script>
-import categories from '@/assets/js/categories'
+import categories from '@/assets/js/categories';
 
 export default {
   data() {
     return {
-      categories
-    }
+      categories,
+    };
   },
   asyncData({ params }) {
     return {
-      category: params.category
-    }
-  }
-}
+      category: params.category,
+    };
+  },
+};
 </script>

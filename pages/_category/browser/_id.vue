@@ -8,8 +8,8 @@
 export default {
   asyncData({ params }) {
     return {
-      id: params.id
-    }
-  }
-}
+      id: params.id,
+    };
+  },
+};
 </script>

@@ -2,21 +2,21 @@ export default [
   {
     id: 'movies',
     title: 'Movies',
-    icon: 'movie'
+    icon: 'movie',
   },
   {
     id: 'tv',
     title: 'TV',
-    icon: 'tv'
+    icon: 'tv',
   },
   {
     id: 'books',
     title: 'Books',
-    icon: 'book'
+    icon: 'book',
   },
   {
     id: 'games',
     title: 'Games',
-    icon: 'games'
-  }
-]
+    icon: 'games',
+  },
+];
