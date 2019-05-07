@@ -2,10 +2,10 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   extends: [
     'airbnb',
@@ -13,11 +13,12 @@ module.exports = {
     'plugin:nuxt/recommended',
     'plugin:prettier/recommended',
     'prettier',
-    'prettier/vue'
+    'prettier/vue',
   ],
   plugins: ['prettier'],
   // add your custom rules here
   rules: {
-    'prefer-destructuring': 0
-  }
+    'prefer-destructuring': 0,
+    'no-console': 0,
+  },
 };
