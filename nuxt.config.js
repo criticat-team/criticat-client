@@ -27,7 +27,7 @@ export default {
    ** Router options
    */
   router: {
-    middleware: 'categories'
+    middleware: ['categories', 'sections'],
   },
 
   /*
