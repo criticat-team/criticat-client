@@ -5,13 +5,13 @@ export default {
     id: 'movies',
     title: 'Movies',
     icon: 'movie',
-    color: colors.red.lighten1,
+    color: colors.red.base,
   },
   tv: {
     id: 'tv',
     title: 'TV',
     icon: 'tv',
-    color: colors.orange.darken2,
+    color: colors.orange.darken3,
   },
   books: {
     id: 'books',

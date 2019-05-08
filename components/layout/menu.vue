@@ -18,8 +18,8 @@
           transition: 'filter 0.3s',
           filter:
             tabSelectorPosition == null || tabSelectorPosition === i
-              ? 'brightness(100%)'
-              : 'brightness(75%)',
+              ? 'opacity(100%)'
+              : 'opacity(60%)',
         }"
       >
         <v-icon>{{ categoryItem.icon }}</v-icon>
