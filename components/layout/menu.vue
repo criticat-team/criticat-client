@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO: Create custom tab selector -->
     <v-tabs
       v-model="tabSelectorPosition"
       grow

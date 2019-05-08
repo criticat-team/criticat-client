@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-show="mounted">
     <v-navigation-drawer v-model="drawer" dark :permanent="permanentDrawer" app @click="goToRoot">
       <v-toolbar v-ripple style="cursor: pointer" flat color="grey darken-3" dark @click="goToRoot">
         <v-toolbar-title style="margin: 0 auto;" v-text="title" />
