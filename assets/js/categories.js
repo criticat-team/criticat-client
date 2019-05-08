@@ -11,7 +11,7 @@ export default {
     id: 'tv',
     title: 'TV',
     icon: 'tv',
-    color: colors.orange.accent4,
+    color: colors.orange.darken3,
   },
   books: {
     id: 'books',
