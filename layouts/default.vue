@@ -1,5 +1,5 @@
 <template>
-  <v-app v-show="mounted">
+  <v-app v-show="domReady">
     <v-navigation-drawer v-model="drawer" dark :permanent="permanentDrawer" app @click="goToRoot">
       <v-toolbar v-ripple style="cursor: pointer" flat color="grey darken-3" dark @click="goToRoot">
         <v-toolbar-title style="margin: 0 auto;" v-text="title" />
@@ -50,6 +50,7 @@ export default {
     return {
       drawer: null,
       mounted: false,
+      domReady: false,
       title: 'Criticat',
     };
   },
@@ -66,6 +67,9 @@ export default {
     // TODO: Find a better solution
     this.$nextTick(() => {
       this.mounted = true;
+      setTimeout(() => {
+        this.domReady = true;
+      });
     });
   },
   methods: {
