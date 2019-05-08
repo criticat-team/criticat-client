@@ -53,6 +53,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
   ],
+
   /*
    ** Axios module configuration
    */
@@ -85,5 +86,17 @@ export default {
         });
       }
     },
+  },
+
+  /*
+   ** Manifest
+   */
+  manifest: {
+    name: 'Criticat',
+    short_name: 'Criticat',
+    lang: 'ca',
+    start_url: '/',
+    background_color: '#424242',
+    theme_color: '#424242',
   },
 };
