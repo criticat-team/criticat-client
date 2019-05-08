@@ -54,6 +54,15 @@ export default {
       title: 'Criticat',
     };
   },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'theme-color', name: 'theme-color', content: this.$vuetify.theme.primary },
+      ],
+    };
+  },
   computed: {
     permanentDrawer() {
       if (this.mounted) {
