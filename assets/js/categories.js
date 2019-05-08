@@ -11,18 +11,18 @@ export default {
     id: 'tv',
     title: 'TV',
     icon: 'tv',
-    color: colors.amber.darken1,
+    color: colors.amber.darken2,
   },
   books: {
     id: 'books',
     title: 'Books',
     icon: 'book',
-    color: colors.cyan.base,
+    color: colors.cyan.darken1,
   },
   games: {
     id: 'games',
     title: 'Games',
     icon: 'games',
-    color: colors.lightGreen.base,
+    color: colors.lightGreen.darken1,
   },
 };
