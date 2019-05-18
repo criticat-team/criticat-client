@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h1>{{ category }} home</h1>
+    <h1>Articles in {{ category }}</h1>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      category: undefined,
+    };
+  },
   asyncData({ params }) {
     return {
       category: params.category,

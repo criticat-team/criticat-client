@@ -1,20 +1,34 @@
 <template>
-  <v-app>
-    <v-navigation-drawer v-model="drawer" fixed app>
-      <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" router>
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+  <v-app v-show="domReady">
+    <v-navigation-drawer v-model="drawer" dark :permanent="permanentDrawer" app @click="goToRoot">
+      <v-toolbar v-ripple style="cursor: pointer" flat color="grey darken-3" dark @click="goToRoot">
+        <v-toolbar-title style="margin: 0 auto;" v-text="title" />
+      </v-toolbar>
+      <layout-menu :category="category" />
     </v-navigation-drawer>
-    <v-toolbar fixed app>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
+    <v-toolbar
+      :color="permanentDrawer ? 'transparent' : 'primary'"
+      :flat="permanentDrawer"
+      :dark="!permanentDrawer"
+      fixed
+      app
+    >
+      <v-text-field
+        v-if="permanentDrawer"
+        class="mt-1 mb-0"
+        solo
+        prepend-inner-icon="search"
+        label="Search"
+      ></v-text-field>
+      <template v-if="!permanentDrawer">
+        <v-toolbar-side-icon @click="drawer = !drawer" />
+        <v-spacer />
+        <v-toolbar-title class="ma-0" v-text="title" />
+        <v-spacer />
+        <v-btn icon>
+          <v-icon>search</v-icon>
+        </v-btn>
+      </template>
     </v-toolbar>
     <v-content>
       <v-container>
@@ -25,26 +39,52 @@
 </template>
 
 <script>
-import categories from '@/assets/js/categories';
+import LayoutMenu from '@/components/layout/menu';
+import { mapState } from 'vuex';
 
 export default {
+  components: {
+    LayoutMenu,
+  },
   data() {
     return {
-      drawer: false,
-      items: categories.map(({ icon, title, id }) => {
-        return {
-          icon,
-          title,
-          to: {
-            name: 'category',
-            params: {
-              category: id,
-            },
-          },
-        };
-      }),
+      drawer: null,
+      mounted: false,
+      domReady: false,
       title: 'Criticat',
     };
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'theme-color', name: 'theme-color', content: this.$vuetify.theme.primary },
+      ],
+    };
+  },
+  computed: {
+    permanentDrawer() {
+      if (this.mounted) {
+        return this.$vuetify.breakpoint.mdAndUp;
+      }
+      return false;
+    },
+    ...mapState(['category']),
+  },
+  mounted() {
+    // TODO: Find a better solution
+    this.$nextTick(() => {
+      this.mounted = true;
+      setTimeout(() => {
+        this.domReady = true;
+      });
+    });
+  },
+  methods: {
+    goToRoot() {
+      this.$router.push({ name: 'index' });
+    },
   },
 };
 </script>
