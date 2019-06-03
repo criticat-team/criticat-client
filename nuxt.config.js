@@ -4,6 +4,10 @@ import pkg from './package';
 export default {
   mode: 'universal',
 
+  env: {
+    APOLLO_HTTP_ENDPOINT: process.env.APOLLO_HTTP_ENDPOINT || 'http://localhost:4000',
+  },
+
   /*
    ** Headers of the page
    */
@@ -60,9 +64,7 @@ export default {
    */
   apollo: {
     clientConfigs: {
-      default: {
-        httpEndpoint: 'http://localhost:4000',
-      },
+      default: '~/plugins/apollo-config.js',
     },
   },
 
