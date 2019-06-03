@@ -1,0 +1,18 @@
+query articles($category: String!, $itemsPerPage: Int!, $continuation: String) {
+  articles(category: $category, itemsPerPage: $itemsPerPage, continuation: $continuation) {
+    items {
+      id
+      title
+      content
+      published
+      author
+      image
+      url
+      origin {
+        title
+        htmlUrl
+      }
+    }
+    continuation
+  }
+}

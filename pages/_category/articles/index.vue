@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h1>Articles in {{ category }}</h1>
+    <articles-list :category="category" />
   </div>
 </template>
 
 <script>
+import ArticlesList from '@/components/articles/ArticlesList';
+
 export default {
+  components: {
+    ArticlesList,
+  },
   data() {
     return {
       category: undefined,

@@ -43,7 +43,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify', { src: '@/plugins/vue-infinite-scroll.js', ssr: false }],
 
   /*
    ** Nuxt.js modules
@@ -52,7 +52,19 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/apollo',
   ],
+
+  /*
+   ** Apollo module configuration
+   */
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:4000',
+      },
+    },
+  },
 
   /*
    ** Axios module configuration
