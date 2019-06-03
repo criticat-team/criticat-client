@@ -1,37 +1,32 @@
 <template>
-  <v-app v-show="domReady">
+  <v-app>
+    <!-- TODO: Find a pure CSS solution instead of JS permamentDrawer -->
     <v-navigation-drawer v-model="drawer" dark :permanent="permanentDrawer" app @click="goToRoot">
       <v-toolbar v-ripple style="cursor: pointer" flat color="grey darken-3" dark @click="goToRoot">
         <v-toolbar-title style="margin: 0 auto;" v-text="title" />
       </v-toolbar>
       <layout-menu :category="category" />
     </v-navigation-drawer>
-    <v-toolbar
-      :color="permanentDrawer ? 'transparent' : 'primary'"
-      :flat="permanentDrawer"
-      :dark="!permanentDrawer"
-      fixed
-      app
-    >
+    <!-- TODO: Find a pure CSS solution instead of two toolbars -->
+    <v-toolbar class="hidden-md-and-up" color="primary" dark fixed app>
+      <v-toolbar-side-icon @click="drawer = !drawer" />
+      <v-spacer />
+      <v-toolbar-title class="ma-0" v-text="title" />
+      <v-spacer />
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <v-toolbar class="hidden-sm-and-down" color="transparent" flat fixed app>
       <v-text-field
-        v-if="permanentDrawer"
         class="mt-1 mb-0"
         solo
         prepend-inner-icon="search"
         label="Search"
       ></v-text-field>
-      <template v-if="!permanentDrawer">
-        <v-toolbar-side-icon @click="drawer = !drawer" />
-        <v-spacer />
-        <v-toolbar-title class="ma-0" v-text="title" />
-        <v-spacer />
-        <v-btn icon>
-          <v-icon>search</v-icon>
-        </v-btn>
-      </template>
     </v-toolbar>
     <v-content>
-      <v-container>
+      <v-container grid-list-lg>
         <nuxt />
       </v-container>
     </v-content>
@@ -49,8 +44,6 @@ export default {
   data() {
     return {
       drawer: null,
-      mounted: false,
-      domReady: false,
       title: 'Criticat',
     };
   },
@@ -65,21 +58,9 @@ export default {
   },
   computed: {
     permanentDrawer() {
-      if (this.mounted) {
-        return this.$vuetify.breakpoint.mdAndUp;
-      }
-      return false;
+      return this.$vuetify.breakpoint.mdAndUp;
     },
     ...mapState(['category']),
-  },
-  mounted() {
-    // TODO: Find a better solution
-    this.$nextTick(() => {
-      this.mounted = true;
-      setTimeout(() => {
-        this.domReady = true;
-      });
-    });
   },
   methods: {
     goToRoot() {
