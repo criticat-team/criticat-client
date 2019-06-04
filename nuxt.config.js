@@ -4,10 +4,6 @@ import pkg from './package';
 export default {
   mode: 'universal',
 
-  env: {
-    APOLLO_HTTP_ENDPOINT: process.env.APOLLO_HTTP_ENDPOINT || 'http://localhost:4000',
-  },
-
   /*
    ** Headers of the page
    */
@@ -57,6 +53,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/apollo',
+    '@nuxtjs/dotenv',
   ],
 
   /*
