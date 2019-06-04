@@ -6,7 +6,15 @@
       infinite-scroll-distance="300"
     >
       <v-layout row wrap>
-        <v-flex v-for="(n, index) in nDisplayedArticles" :key="index" tag="article" sm6 lg4 xl3>
+        <v-flex
+          v-for="(n, index) in nDisplayedArticles"
+          :key="index"
+          tag="article"
+          xs12
+          sm6
+          lg4
+          xl3
+        >
           <article-item :article="loadedArticles[index]" />
         </v-flex>
       </v-layout>
