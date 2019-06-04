@@ -4,6 +4,10 @@ import pkg from './package';
 export default {
   mode: 'universal',
 
+  env: {
+    APOLLO_HTTP_ENDPOINT: process.env.APOLLO_HTTP_ENDPOINT,
+  },
+
   /*
    ** Headers of the page
    */
