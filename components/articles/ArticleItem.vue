@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card hover ripple class="article-item" tag="article" height="100%">
+    <v-card class="article-item" tag="article" height="100%">
       <v-img
         :src="usePlaceholder || article.image == null ? imagePlaceholder : article.image"
         :lazy-src="imagePlaceholder"
@@ -58,6 +58,7 @@ export default {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     height: 160px;
+    overflow-wrap: break-word;
   }
 }
 </style>
