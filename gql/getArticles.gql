@@ -11,6 +11,7 @@ query articles($category: String!, $itemsPerPage: Int!, $continuation: String) {
       origin {
         title
         htmlUrl
+        iconUrl
       }
     }
     continuation

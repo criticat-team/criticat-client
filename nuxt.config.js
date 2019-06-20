@@ -58,7 +58,13 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/apollo',
     '@nuxtjs/dotenv',
+    '@nuxtjs/moment',
   ],
+
+  moment: {
+    locales: ['ca'],
+    defaultLocale: 'ca',
+  },
 
   /*
    ** Apollo module configuration
