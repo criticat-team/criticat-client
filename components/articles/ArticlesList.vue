@@ -3,7 +3,7 @@
     <div
       v-infinite-scroll="showMore"
       infinite-scroll-disabled="infiniteScrollDisabled"
-      infinite-scroll-distance="300"
+      infinite-scroll-distance="800"
     >
       <v-layout row wrap>
         <v-flex
