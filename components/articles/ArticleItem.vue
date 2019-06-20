@@ -95,7 +95,7 @@ export default {
 
   &__content {
     height: 220px;
-    padding-top: 0;
+    padding-top: 0 !important;
     overflow: hidden;
 
     &__title {
