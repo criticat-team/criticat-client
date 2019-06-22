@@ -4,6 +4,10 @@ import pkg from './package';
 export default {
   mode: 'universal',
 
+  env: {
+    APOLLO_HTTP_ENDPOINT: process.env.APOLLO_HTTP_ENDPOINT,
+  },
+
   /*
    ** Headers of the page
    */
@@ -43,7 +47,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify', { src: '@/plugins/vue-infinite-scroll.js', ssr: false }],
 
   /*
    ** Nuxt.js modules
@@ -52,7 +56,24 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/apollo',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/moment',
   ],
+
+  moment: {
+    locales: ['ca'],
+    defaultLocale: 'ca',
+  },
+
+  /*
+   ** Apollo module configuration
+   */
+  apollo: {
+    clientConfigs: {
+      default: '~/plugins/apollo-config.js',
+    },
+  },
 
   /*
    ** Axios module configuration
