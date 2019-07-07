@@ -1,4 +1,3 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
 import pkg from './package';
 
 export default {
@@ -42,12 +41,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/style/app.styl'],
+  css: ['~/assets/style/app.scss'],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', { src: '@/plugins/vue-infinite-scroll.js', ssr: false }],
+  plugins: [{ src: '@/plugins/vue-infinite-scroll.js', ssr: false }],
 
   /*
    ** Nuxt.js modules
@@ -60,6 +59,24 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
   ],
+
+  devModules: ['@nuxtjs/vuetify'],
+
+  /*
+   ** Vuetify options
+   ** Doc: https://github.com/nuxt-community/vuetify-module
+   */
+  vuetify: {
+    customVariables: ['~/assets/style/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        light: {
+          primary: '#555555', // TODO: Choose proper color
+        },
+      },
+    },
+  },
 
   moment: {
     locales: ['ca'],
@@ -86,13 +103,6 @@ export default {
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl'],
-      },
-    },
     /*
      ** You can extend webpack config here
      */

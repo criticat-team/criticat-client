@@ -6,6 +6,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      category: undefined,
+    };
+  },
   asyncData({ params }) {
     return {
       category: params.category,
