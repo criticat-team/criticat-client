@@ -11,9 +11,9 @@
           :key="index"
           tag="article"
           xs12
-          sm6
-          lg4
-          xl3
+          sm12
+          lg6
+          xl4
         >
           <article-item :article="loadedArticles[index]" />
         </v-flex>
