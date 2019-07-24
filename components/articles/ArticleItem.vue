@@ -1,34 +1,35 @@
 <template>
   <v-card class="article-item" tag="article" height="100%">
-    <a :href="url" target="_blank">
-      <v-img
-        v-if="image || !loaded"
-        class="hidden-sm-and-up"
-        :src="image"
-        :aspect-ratio="16 / 9"
-        style="background-color: #e3e3e3;"
-      ></v-img>
-      <v-img
-        class="hidden-xs-only"
-        :src="image"
-        :aspect-ratio="16 / 9"
-        style="background-color: #e3e3e3;"
-      ></v-img>
-    </a>
-    <v-card-actions>
-      <v-btn flat small color="grey" target="_blank" :href="originUrl">
-        <v-img height="16" width="16" max-width="16" :src="originImg"></v-img>
-        <span class="ml-2">{{ origin }}</span>
-      </v-btn>
-      <v-spacer />
-      <span class="grey--text pr-2">{{ publishedAt }}</span>
-    </v-card-actions>
+    <loading-overlay :active="!loaded" />
+    <v-img
+      class="article-item__image white--text primary"
+      :src="image"
+      :aspect-ratio="16 / 9"
+      gradient="to bottom, rgba(0,0,0,.4) 0%, rgba(0,0,0,.1) 20%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.5)"
+    >
+      <a class="article-item__image__content" :href="url" target="_blank">
+        <v-card-actions style="position: absolute; width: 100%">
+          <v-layout row>
+            <v-flex tag="span" class="white--text overline" grow shrink v-text="origin" />
+            <v-spacer />
+            <v-flex
+              tag="span"
+              class="white--text text-no-wrap overline"
+              shrink
+              v-text="publishedAt"
+            />
+          </v-layout>
+        </v-card-actions>
+        <v-card-title
+          class="article-item__image__content__title fill-height align-end white--text"
+          v-text="title"
+        />
+      </a>
+    </v-img>
     <v-card-text class="article-item__content">
+      <loading-lines :active="!loaded" :lines="10" />
       <div class="article-item__content__overlay"></div>
-      <div class="article-item__content__title">
-        <a :href="url" target="_blank" class="title">{{ title }}</a>
-      </div>
-      <p class="article-item__content__text">{{ content }}</p>
+      <p class="article-item__content__text" v-text="content"></p>
     </v-card-text>
     <v-card-actions>
       <v-btn
@@ -36,7 +37,7 @@
         block
         :href="url"
         target="_blank"
-        flat
+        text
         color="primary"
       >
         Continua llegint
@@ -47,8 +48,14 @@
 
 <script>
 import moment from 'moment';
+import LoadingOverlay from '@/components/ui/LoadingOverlay';
+import LoadingLines from '@/components/ui/LoadingLines';
 
 export default {
+  components: {
+    LoadingOverlay,
+    LoadingLines,
+  },
   props: {
     article: {
       mandatory: true,
@@ -88,35 +95,29 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 .article-item {
-  display: flex;
   flex-direction: column;
 
-  &__content {
-    height: 220px;
-    padding-top: 0 !important;
-    overflow: hidden;
-
-    &__title {
-      align-items: flex-start;
-      overflow: hidden;
-
-      a {
-        text-decoration: none;
+  &__image {
+    &__content {
+      text-decoration: none;
+      &__title {
+        padding-top: 32px;
       }
     }
+  }
 
-    &__text {
-      margin-top: 10px;
-    }
+  &__content {
+    height: 160px;
+    overflow: hidden;
 
     &__overlay {
       position: absolute;
       pointer-events: none;
-      background: linear-gradient(rgba(0, 0, 0, 0) 70%, white);
+      background: linear-gradient(transparent 70%, white);
       width: calc(100% - 32px);
-      height: 220px;
+      height: 144px;
     }
   }
 }
