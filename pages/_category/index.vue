@@ -1,11 +1,18 @@
 <template>
   <div>
-    <h1>{{ category }} home</h1>
+    <no-ssr>
+      <articles-slider :category="category" />
+    </no-ssr>
   </div>
 </template>
 
 <script>
+import ArticlesSlider from '@/components/articles/ArticlesSlider';
+
 export default {
+  components: {
+    ArticlesSlider,
+  },
   data() {
     return {
       category: undefined,

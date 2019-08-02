@@ -1,6 +1,6 @@
 <template>
   <div v-if="active" class="loading-lines">
-    <div v-for="line in lines" :key="line" class="loading-lines__line grey lighten-4"></div>
+    <div v-for="line in lines" :key="line" class="loading-lines__line grey lighten-2"></div>
   </div>
 </template>
 
