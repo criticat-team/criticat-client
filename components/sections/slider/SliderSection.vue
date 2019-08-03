@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="card" tag="section" class="slider-section slider-section--card">
+    <v-card v-if="cardContainer" tag="section" class="slider-section slider-section--card">
       <v-card-title class="slider-section__header">
         <span class="slider-section__header__title overline font-weight-medium" v-text="title" />
         <v-spacer />
@@ -8,10 +8,16 @@
           :to="{ name: 'category-articles' }"
           class="slider-section__header__link caption font-weight-medium"
         >
-          Mostra-ho tot
+          See more
         </nuxt-link>
       </v-card-title>
-      <slider class="slider-section__slider">
+      <slider
+        class="slider-section__slider"
+        :width="width"
+        :outer-gap="24"
+        :inner-gap="innerGap"
+        :show-buttons="false"
+      >
         <slot />
       </slider>
     </v-card>
@@ -23,10 +29,16 @@
           :to="{ name: 'category-articles' }"
           class="slider-section__header__link subtitle-1 font-weight-medium"
         >
-          Mostra-ho tot
+          See more
         </nuxt-link>
       </div>
-      <slider class="slider-section__slider">
+      <slider
+        class="slider-section__slider"
+        :width="width"
+        :outer-gap="12"
+        :inner-gap="innerGap"
+        :show-buttons="true"
+      >
         <slot />
       </slider>
     </section>
@@ -34,7 +46,7 @@
 </template>
 
 <script>
-import Slider from '@/components/ui/Slider';
+import Slider from '@/components/ui/slider/Slider';
 
 export default {
   components: {
@@ -46,10 +58,20 @@ export default {
       mandatory: true,
       default: '',
     },
-    card: {
+    cardContainer: {
       type: Boolean,
       mandatory: false,
       default: false,
+    },
+    width: {
+      type: Number,
+      mandatory: false,
+      default: 300,
+    },
+    innerGap: {
+      type: Number,
+      mandatory: false,
+      default: 12,
     },
   },
 };
@@ -68,21 +90,13 @@ $distance: 12px;
     }
   }
   &__slider {
+    margin-left: -$distance;
+    margin-right: -$distance;
   }
   &--card {
     .slider-section {
       &__header {
         padding-bottom: 4px;
-      }
-      &__slider {
-        margin-left: -$distance;
-        margin-right: -$distance;
-        &::before,
-        &::after {
-          min-width: $distance * 2;
-          max-width: $distance * 2;
-          content: '';
-        }
       }
     }
   }

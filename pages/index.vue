@@ -1,9 +1,17 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <no-ssr>
+      <articles-slider />
+    </no-ssr>
   </div>
 </template>
 
 <script>
-export default {};
+import ArticlesSlider from '@/components/articles/ArticlesSlider';
+
+export default {
+  components: {
+    ArticlesSlider,
+  },
+};
 </script>

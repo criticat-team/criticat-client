@@ -1,10 +1,10 @@
 <template>
-  <slider-section :card="card" title="Articles">
+  <slider-section :width="280" :inner-gap="12" :card-container="cardContainer" title="Articles">
     <article-item
       v-for="(n, index) in nDisplayedArticles"
       :key="index"
       compact
-      :elevation="itemElevation"
+      :elevation="cardContainer ? 4 : 2"
       :article="loadedArticles[index]"
     />
   </slider-section>
@@ -12,7 +12,7 @@
 
 <script>
 import ArticleItem from '@/components/articles/ArticleItem';
-import SliderSection from '@/components/ui/SliderSection';
+import SliderSection from '@/components/sections/slider/SliderSection';
 import getArticlesGql from '@/gql/getArticles.gql';
 
 export default {
@@ -24,7 +24,7 @@ export default {
     category: {
       mandatory: false,
       type: String,
-      default: null,
+      default: 'all',
     },
   },
   data() {
@@ -35,11 +35,8 @@ export default {
     };
   },
   computed: {
-    card() {
+    cardContainer() {
       return this.$vuetify.breakpoint.smAndDown;
-    },
-    itemElevation() {
-      return this.card ? 4 : 2;
     },
     initialLoadHasFinished() {
       return this.articles != null;

@@ -5,7 +5,7 @@
       class="article-item__image white--text grey lighten-2"
       :src="image"
       :aspect-ratio="16 / 9"
-      gradient="to bottom, rgba(0,0,0,.4) 0%, rgba(0,0,0,.1) 20%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.5)"
+      gradient="to bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,.1) 20%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.7)"
     >
       <a class="article-item__image__content" :href="url" target="_blank">
         <v-card-actions style="position: absolute; width: 100%">
@@ -23,8 +23,9 @@
         <v-card-title
           class="article-item__image__content__title fill-height align-end white--text headline"
           :class="compact ? 'body-1' : 'headline'"
-          v-text="title"
-        />
+        >
+          <span v-text="title" />
+        </v-card-title>
       </a>
     </v-img>
     <template v-if="!compact">
@@ -51,8 +52,8 @@
 
 <script>
 import moment from 'moment';
-import LoadingOverlay from '@/components/ui/LoadingOverlay';
-import LoadingLines from '@/components/ui/LoadingLines';
+import LoadingOverlay from '@/components/ui/loading/LoadingOverlay';
+import LoadingLines from '@/components/ui/loading/LoadingLines';
 
 export default {
   components: {
@@ -116,6 +117,12 @@ export default {
     &__content {
       text-decoration: none;
       &__title {
+        span {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
         padding-top: 32px;
       }
     }

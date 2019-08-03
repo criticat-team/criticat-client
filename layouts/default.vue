@@ -7,6 +7,7 @@
       dark
       :permanent="permanentDrawer"
       width="300"
+      :touchless="permanentDrawer"
       app
     >
       <nuxt-link class="navigation-drawer__home" :to="{ name: 'index' }">

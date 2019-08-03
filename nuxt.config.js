@@ -46,7 +46,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '@/plugins/vue-infinite-scroll.js', ssr: false }],
+  plugins: [
+    { src: '@/plugins/vue-infinite-scroll.js', ssr: false },
+    { src: '@/plugins/vue-scroll.js', ssr: false },
+  ],
 
   /*
    ** Nuxt.js modules
@@ -58,6 +61,7 @@ export default {
     '@nuxtjs/apollo',
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
+    'vue-scrollto/nuxt',
   ],
 
   devModules: ['@nuxtjs/vuetify'],
