@@ -3,11 +3,11 @@
     <slider-content
       ref="sliderContent"
       v-resize="calculateSliderWidth"
-      v-scroll="handleScroll"
       class="slider__content"
       :outer-gap="outerGap"
       :inner-gap="innerGap"
       :width="width"
+      @scroll.native="handleScroll"
       ><slot
     /></slider-content>
     <template v-if="showButtons">
@@ -141,8 +141,8 @@ export default {
       this.sliderScrollWidth = this.$refs.sliderContent.$el.scrollWidth;
       this.sliderClientWidth = this.$refs.sliderContent.$el.clientWidth;
     },
-    handleScroll(ev, { scrollLeft }) {
-      this.scrollPosition = scrollLeft;
+    handleScroll(ev) {
+      this.scrollPosition = ev.target.scrollLeft;
     },
   },
 };
