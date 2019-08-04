@@ -1,5 +1,12 @@
 <template>
-  <slider-section :width="280" :inner-gap="12" :card-container="cardContainer" title="Articles">
+  <slider-section
+    :width="280"
+    :inner-gap="12"
+    :card-container="cardContainer"
+    title="Articles"
+    :show-more-route="{ name: 'category-articles' }"
+    :category="category"
+  >
     <article-item
       v-for="(n, index) in nDisplayedArticles"
       :key="index"
@@ -24,7 +31,7 @@ export default {
     category: {
       mandatory: false,
       type: String,
-      default: 'all',
+      default: null,
     },
   },
   data() {
@@ -68,7 +75,7 @@ export default {
       query: getArticlesGql,
       variables() {
         return {
-          category: this.category,
+          category: this.category || 'all',
           itemsPerPage: this.itemsPerPage,
         };
       },

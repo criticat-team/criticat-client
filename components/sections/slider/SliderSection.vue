@@ -1,58 +1,38 @@
 <template>
-  <div>
-    <v-card v-if="cardContainer" tag="section" class="slider-section slider-section--card">
-      <v-card-title class="slider-section__header">
-        <span class="slider-section__header__title overline font-weight-medium" v-text="title" />
-        <v-spacer />
-        <nuxt-link
-          :to="{ name: 'category-articles' }"
-          class="slider-section__header__link caption font-weight-medium"
-        >
-          See more
-        </nuxt-link>
-      </v-card-title>
+  <component :is="layoutComponent" :title="title">
+    <template v-if="showMoreRoute !== null" #show-more>
+      <slider-section-show-more :category="category" :route="showMoreRoute" />
+    </template>
+    <template #slider="{ outerGap, showButtons }">
       <slider
-        class="slider-section__slider"
         :width="width"
-        :outer-gap="24"
+        :outer-gap="outerGap"
         :inner-gap="innerGap"
-        :show-buttons="false"
+        :show-buttons="showButtons"
       >
         <slot />
       </slider>
-    </v-card>
-    <section v-else class="slider-section">
-      <div class="slider-section__header">
-        <span class="slider-section__header__title subtitle-1 font-weight-medium" v-text="title" />
-        <v-spacer />
-        <nuxt-link
-          :to="{ name: 'category-articles' }"
-          class="slider-section__header__link subtitle-1 font-weight-medium"
-        >
-          See more
-        </nuxt-link>
-      </div>
-      <slider
-        class="slider-section__slider"
-        :width="width"
-        :outer-gap="12"
-        :inner-gap="innerGap"
-        :show-buttons="true"
-      >
-        <slot />
-      </slider>
-    </section>
-  </div>
+    </template>
+  </component>
 </template>
 
 <script>
 import Slider from '@/components/ui/slider/Slider';
+import CardSliderSectionLayout from '@/components/sections/slider/layouts/CardSliderSectionLayout';
+import SimpleSliderSectionLayout from '@/components/sections/slider/layouts/SimpleSliderSectionLayout';
+import SliderSectionShowMore from '@/components/sections/slider/SliderSectionShowMore';
 
 export default {
   components: {
     Slider,
+    SliderSectionShowMore,
   },
   props: {
+    category: {
+      type: String,
+      mandatory: true,
+      default: null,
+    },
     title: {
       type: String,
       mandatory: true,
@@ -73,32 +53,16 @@ export default {
       mandatory: false,
       default: 12,
     },
+    showMoreRoute: {
+      type: Object,
+      mandatory: false,
+      default: null,
+    },
+  },
+  computed: {
+    layoutComponent() {
+      return this.cardContainer ? CardSliderSectionLayout : SimpleSliderSectionLayout;
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-$distance: 12px;
-.slider-section {
-  padding-bottom: $distance - 8px;
-  margin-bottom: 20px;
-  &__header {
-    display: flex;
-    flex-direction: row;
-    &__link {
-      text-decoration: none;
-    }
-  }
-  &__slider {
-    margin-left: -$distance;
-    margin-right: -$distance;
-  }
-  &--card {
-    .slider-section {
-      &__header {
-        padding-bottom: 4px;
-      }
-    }
-  }
-}
-</style>
