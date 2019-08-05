@@ -37,13 +37,16 @@ const articlesMixin = {
         this.nDisplayedArticles > this.loadedArticles.length
       );
     },
+    categoryKey() {
+      return this.category || 'all';
+    },
   },
   apollo: {
     articles: {
       query: getArticlesGql,
       variables() {
         return {
-          category: this.category || 'all',
+          category: this.categoryKey,
           itemsPerPage: this.itemsPerPage,
         };
       },
@@ -65,7 +68,7 @@ const articlesMixin = {
       this.$apollo.queries.articles
         .fetchMore({
           variables: {
-            category: this.category || 'all',
+            category: this.categoryKey,
             itemsPerPage: this.itemsPerPage,
             continuation: this.articles.continuation,
           },
