@@ -1,7 +1,9 @@
 <template>
   <div>
     <no-ssr>
-      <articles-slider />
+      <section>
+        <articles-slider />
+      </section>
     </no-ssr>
   </div>
 </template>

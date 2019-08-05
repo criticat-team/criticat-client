@@ -1,7 +1,9 @@
 <template>
   <div>
     <no-ssr>
-      <articles-slider :category="category" />
+      <section>
+        <articles-slider :category="category" />
+      </section>
     </no-ssr>
   </div>
 </template>
