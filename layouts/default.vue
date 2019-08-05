@@ -9,7 +9,7 @@
       :touchless="permanentDrawer"
       app
     >
-      <nuxt-link class="navigation-drawer__home" :to="{ name: 'index' }">
+      <nuxt-link class="navigation-drawer__home" :to="localePath({ name: 'index' })">
         <v-toolbar v-ripple style="cursor: pointer;" color="grey darken-3" dark>
           <v-toolbar-title style="margin: 0 auto;" v-text="title" />
         </v-toolbar>
@@ -18,16 +18,18 @@
         <v-btn
           v-for="cat in categories"
           :key="cat.id"
-          :to="{
-            name: 'category',
-            params: {
-              category: cat.id,
-            },
-          }"
+          :to="
+            localePath({
+              name: 'category',
+              params: {
+                category: $t(`categories.${cat.id}.route`),
+              },
+            })
+          "
           nuxt
           :color="cat.color"
         >
-          <span>{{ cat.title }}</span>
+          <span>{{ $t(`categories.${cat.id}.name`) }}</span>
           <v-icon>{{ cat.icon }}</v-icon>
         </v-btn>
       </v-bottom-navigation>
@@ -36,7 +38,7 @@
     <v-app-bar class="hidden-md-and-up" color="primary" dark fixed hide-on-scroll height="56">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer />
-      <nuxt-link class="navigation-drawer__home" :to="{ name: 'index' }">
+      <nuxt-link class="navigation-drawer__home" :to="localePath({ name: 'index' })">
         <v-toolbar-title class="white--text" v-text="title" />
       </nuxt-link>
       <v-spacer />
@@ -56,16 +58,18 @@
       <v-btn
         v-for="cat in categories"
         :key="cat.id"
-        :to="{
-          name: 'category',
-          params: {
-            category: cat.id,
-          },
-        }"
+        :to="
+          localePath({
+            name: 'category',
+            params: {
+              category: $t(`categories.${cat.id}.route`),
+            },
+          })
+        "
         nuxt
         :color="cat.color"
       >
-        <span>{{ cat.title }}</span>
+        <span>{{ $t(`categories.${cat.id}.name`) }}</span>
         <v-icon>{{ cat.icon }}</v-icon>
       </v-btn>
     </v-bottom-navigation>

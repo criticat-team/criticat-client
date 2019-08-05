@@ -4,7 +4,7 @@ const articlesMixin = {
   props: {
     category: {
       mandatory: false,
-      type: String,
+      type: Object,
       default: null,
     },
   },
@@ -38,7 +38,7 @@ const articlesMixin = {
       );
     },
     categoryKey() {
-      return this.category || 'all';
+      return this.category ? this.category.id : 'all';
     },
   },
   apollo: {

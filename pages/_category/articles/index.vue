@@ -6,8 +6,17 @@
 
 <script>
 import ArticlesList from '@/components/articles/ArticlesList';
+import sections from '@/assets/js/sections';
 
 export default {
+  meta: {
+    compatibility: sections.articles.compatibility,
+  },
+  nuxtI18n: {
+    paths: {
+      ca: '/:category/noticies',
+    },
+  },
   components: {
     ArticlesList,
   },
@@ -16,9 +25,9 @@ export default {
       category: undefined,
     };
   },
-  asyncData({ params }) {
+  asyncData({ store }) {
     return {
-      category: params.category,
+      category: store.state.category,
     };
   },
 };

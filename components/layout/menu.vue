@@ -4,12 +4,14 @@
       <v-list-item
         v-for="(section, n) in visibleSections"
         :key="n"
-        :to="{
-          name: section.route,
-          params: {
-            category: category.id,
-          },
-        }"
+        :to="
+          localePath({
+            name: section.routeName,
+            params: {
+              category: $t(`categories.${category.id}.route`),
+            },
+          })
+        "
         nuxt
         exact
       >
@@ -17,7 +19,7 @@
           <v-icon>{{ section.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="section.title" />
+          <v-list-item-title v-text="$t(`sections.${section.id}.name`)" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -25,15 +27,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import sections from '@/assets/js/sections';
 
 export default {
-  props: {
-    category: {
-      type: Object,
-      default: null,
-    },
-  },
   data() {
     return {
       visibleTab: null,
@@ -41,6 +38,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(['category']),
     visibleSections() {
       return this.category !== null
         ? this.sections.filter(section => section.compatibility.includes(this.category.id))

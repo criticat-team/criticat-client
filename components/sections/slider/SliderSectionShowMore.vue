@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link v-if="category !== null" class="show-more-link" :to="route">
+    <nuxt-link v-if="category !== null" class="show-more-link" :to="localePath(route)">
       Show more
     </nuxt-link>
     <v-speed-dial
@@ -19,7 +19,7 @@
         v-for="cat in categories"
         :key="cat.id"
         :elevation="6"
-        :to="{ ...route, params: { category: cat.id } }"
+        :to="localePath({ ...route, params: { category: $t(`categories.${cat.id}.route`) } })"
         nuxt
         fab
         dark
@@ -43,7 +43,7 @@ export default {
       default: null,
     },
     category: {
-      type: String,
+      type: Object,
       mandatory: true,
       default: null,
     },

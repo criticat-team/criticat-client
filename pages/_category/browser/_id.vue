@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  asyncData({ params }) {
+  asyncData({ store }) {
     return {
-      id: params.id,
+      category: store.state.category,
     };
   },
 };

@@ -59,6 +59,7 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
     'vue-scrollto/nuxt',
+    'nuxt-i18n',
   ],
 
   devModules: ['@nuxtjs/vuetify'],
@@ -79,6 +80,28 @@ export default {
     },
   },
 
+  /*
+   ** Moment module configuration
+   */
+  i18n: {
+    locales: [
+      {
+        code: 'ca',
+        file: '/ca.js',
+      },
+    ],
+    defaultLocale: 'ca',
+    langDir: 'lang',
+    detectBrowserLanguage: false,
+    lazy: true,
+    vueI18n: {
+      fallbackLocale: 'ca',
+    },
+  },
+
+  /*
+   ** Moment module configuration
+   */
   moment: {
     locales: ['ca'],
     defaultLocale: 'ca',

@@ -5,7 +5,7 @@ export default {
     id: 'home',
     title: 'Home',
     icon: 'home',
-    route: 'category',
+    routeName: 'category',
     compatibility: [
       categories.movies.id,
       categories.tv.id,
@@ -17,14 +17,14 @@ export default {
     id: 'browser',
     title: 'Browser',
     icon: 'list',
-    route: 'category-browser',
+    routeName: 'category-browser',
     compatibility: [categories.movies.id, categories.tv.id],
   },
   articles: {
     id: 'articles',
     title: 'Articles',
     icon: 'art_track',
-    route: 'category-articles',
+    routeName: 'category-articles',
     compatibility: [
       categories.movies.id,
       categories.tv.id,

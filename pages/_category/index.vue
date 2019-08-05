@@ -20,9 +20,9 @@ export default {
       category: undefined,
     };
   },
-  asyncData({ params }) {
+  asyncData({ store }) {
     return {
-      category: params.category,
+      category: store.state.category,
     };
   },
 };
