@@ -3,7 +3,6 @@ import categories from '@/assets/js/categories';
 export default {
   home: {
     id: 'home',
-    title: 'Home',
     icon: 'home',
     routeName: 'category',
     compatibility: [
@@ -15,14 +14,12 @@ export default {
   },
   browser: {
     id: 'browser',
-    title: 'Browser',
     icon: 'list',
     routeName: 'category-browser',
     compatibility: [categories.movies.id, categories.tv.id],
   },
   articles: {
     id: 'articles',
-    title: 'Articles',
     icon: 'art_track',
     routeName: 'category-articles',
     compatibility: [
