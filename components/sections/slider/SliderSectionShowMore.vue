@@ -10,7 +10,7 @@
       direction="bottom"
       transition="slide-y-reverse-transition"
     >
-      <template v-slot:activator>
+      <template #activator>
         <div class="show-more-buttons__text primary--text">
           Show more<v-icon :size="18">{{ speedDial ? 'arrow_drop_up' : 'arrow_drop_down' }}</v-icon>
         </div>
