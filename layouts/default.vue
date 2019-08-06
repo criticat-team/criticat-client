@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <!-- TODO: Find a pure CSS solution instead of JS permamentDrawer -->
     <v-navigation-drawer
       v-model="drawer"
       class="navigation-drawer"
       dark
       :permanent="permanentDrawer"
-      width="300"
+      width="320"
+      :touchless="permanentDrawer"
       app
     >
       <nuxt-link class="navigation-drawer__home" :to="{ name: 'index' }">
@@ -14,39 +14,31 @@
           <v-toolbar-title style="margin: 0 auto;" v-text="title" />
         </v-toolbar>
       </nuxt-link>
-      <v-tabs
-        class="navigation-drawer__categories"
-        grow
-        centered
-        :hide-slider="true"
-        dark
-        :mandatory="false"
-      >
-        <v-tab
-          v-for="(categoryItem, i) in categories"
-          :key="i"
-          :ripple="true"
+      <v-bottom-navigation dark shift grow>
+        <v-btn
+          v-for="cat in categories"
+          :key="cat.id"
           :to="{
             name: 'category',
             params: {
-              category: categoryItem.id,
+              category: cat.id,
             },
           }"
-          :style="{
-            backgroundColor: categoryItem.color,
-            transition: 'filter 0.3s',
-          }"
+          nuxt
+          :color="cat.color"
         >
-          <v-icon>{{ categoryItem.icon }}</v-icon>
-        </v-tab>
-      </v-tabs>
+          <span>{{ cat.title }}</span>
+          <v-icon>{{ cat.icon }}</v-icon>
+        </v-btn>
+      </v-bottom-navigation>
       <layout-menu class="navigation-drawer__sections" :category="category" />
     </v-navigation-drawer>
-    <!-- TODO: Find a pure CSS solution instead of two toolbars -->
-    <v-app-bar class="hidden-md-and-up" color="primary" dark fixed height="56">
+    <v-app-bar class="hidden-md-and-up" color="primary" dark fixed hide-on-scroll height="56">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer />
-      <v-toolbar-title class="ma-0" v-text="title" />
+      <nuxt-link class="navigation-drawer__home" :to="{ name: 'index' }">
+        <v-toolbar-title class="white--text" v-text="title" />
+      </nuxt-link>
       <v-spacer />
       <v-btn icon>
         <v-icon>search</v-icon>
@@ -60,6 +52,23 @@
         <nuxt />
       </v-container>
     </v-content>
+    <v-bottom-navigation v-show="!permanentDrawer" app dark shift grow hide-on-scroll>
+      <v-btn
+        v-for="cat in categories"
+        :key="cat.id"
+        :to="{
+          name: 'category',
+          params: {
+            category: cat.id,
+          },
+        }"
+        nuxt
+        :color="cat.color"
+      >
+        <span>{{ cat.title }}</span>
+        <v-icon>{{ cat.icon }}</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -76,7 +85,7 @@ export default {
   data() {
     return {
       visibleTab: null,
-      categories: Object.values(categories),
+      categories,
       drawer: null,
       title: 'Criticat',
     };
@@ -117,11 +126,6 @@ export default {
 .navigation-drawer {
   &__home {
     text-decoration: none;
-  }
-  &__categories {
-    .v-tab {
-      min-width: auto;
-    }
   }
 }
 </style>

@@ -31,7 +31,7 @@ export default {
   animation-iteration-count: infinite;
   animation-name: loading-overlay-animation;
   animation-timing-function: linear;
-  background: linear-gradient(to right, transparent 8%, white 18%, transparent 33%);
+  background: linear-gradient(to right, white 18%, transparent 28%, white 38%);
   background-size: 200%;
   opacity: 0.3;
 }

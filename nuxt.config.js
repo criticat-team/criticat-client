@@ -58,6 +58,7 @@ export default {
     '@nuxtjs/apollo',
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
+    'vue-scrollto/nuxt',
   ],
 
   devModules: ['@nuxtjs/vuetify'],
