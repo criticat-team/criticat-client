@@ -6,11 +6,11 @@
 
 <script>
 import ArticlesList from '@/components/articles/ArticlesList';
-import sections from '@/assets/js/sections';
+import pages from '@/assets/js/pages';
 
 export default {
   meta: {
-    compatibility: sections.articles.compatibility,
+    compatibility: pages.articles.compatibility,
   },
   nuxtI18n: {
     paths: {

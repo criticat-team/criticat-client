@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt-link v-if="category !== null" class="show-more-link" :to="localePath(route)">
-      Show more
+      {{ $t('components.ui.slider.show_more_button') }}
     </nuxt-link>
     <v-speed-dial
       v-else
@@ -12,14 +12,15 @@
     >
       <template #activator>
         <div class="show-more-buttons__text primary--text">
-          Show more<v-icon :size="18">{{ speedDial ? 'arrow_drop_up' : 'arrow_drop_down' }}</v-icon>
+          {{ $t('components.ui.slider.show_more_button')
+          }}<v-icon :size="18">{{ speedDial ? 'arrow_drop_up' : 'arrow_drop_down' }}</v-icon>
         </div>
       </template>
       <v-btn
         v-for="cat in categories"
         :key="cat.id"
         :elevation="6"
-        :to="localePath({ ...route, params: { category: $t(`categories.${cat.id}.route`) } })"
+        :to="localePath({ ...route, params: { category: $t(`categories.${cat.id}.slug`) } })"
         nuxt
         fab
         dark

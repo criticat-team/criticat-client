@@ -30,7 +30,7 @@ export default {
    ** Router options
    */
   router: {
-    middleware: ['categories', 'sections'],
+    middleware: ['categories', 'pages'],
   },
 
   /*

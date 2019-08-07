@@ -2,13 +2,13 @@
   <div>
     <v-list flat>
       <v-list-item
-        v-for="(section, n) in visibleSections"
+        v-for="(page, n) in visiblePages"
         :key="n"
         :to="
           localePath({
-            name: section.routeName,
+            name: page.routeName,
             params: {
-              category: $t(`categories.${category.id}.route`),
+              category: $t(`categories.${category.id}.slug`),
             },
           })
         "
@@ -16,10 +16,10 @@
         exact
       >
         <v-list-item-action>
-          <v-icon>{{ section.icon }}</v-icon>
+          <v-icon>{{ page.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="$t(`sections.${section.id}.name`)" />
+          <v-list-item-title v-text="$t(`pages.${page.id}.name`)" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -28,20 +28,20 @@
 
 <script>
 import { mapState } from 'vuex';
-import sections from '@/assets/js/sections';
+import pages from '@/assets/js/pages';
 
 export default {
   data() {
     return {
       visibleTab: null,
-      sections: Object.values(sections),
+      pages: Object.values(pages),
     };
   },
   computed: {
     ...mapState(['category']),
-    visibleSections() {
+    visiblePages() {
       return this.category !== null
-        ? this.sections.filter(section => section.compatibility.includes(this.category.id))
+        ? this.pages.filter(page => page.compatibility.includes(this.category.id))
         : [];
     },
   },

@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import sections from '@/assets/js/sections';
+import pages from '@/assets/js/pages';
 
 export default {
   meta: {
-    compatibility: sections.browser.compatibility,
+    compatibility: pages.browser.compatibility,
   },
   nuxtI18n: {
     paths: {

@@ -3,7 +3,7 @@ import categories from '@/assets/js/categories';
 export default function({ params, store, redirect, app }) {
   if (params.category) {
     const category = Object.values(categories).find(cat => {
-      return app.i18n.t(`categories.${cat.id}.route`) === params.category;
+      return app.i18n.t(`categories.${cat.id}.slug`) === params.category;
     });
     if (category) {
       store.commit('setCategory', category);

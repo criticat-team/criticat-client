@@ -22,7 +22,7 @@
             localePath({
               name: 'category',
               params: {
-                category: $t(`categories.${cat.id}.route`),
+                category: $t(`categories.${cat.id}.slug`),
               },
             })
           "
@@ -47,7 +47,12 @@
       </v-btn>
     </v-app-bar>
     <v-app-bar app flat class="hidden-sm-and-down" color="transparent" height="64" fixed>
-      <v-text-field hide-details solo prepend-inner-icon="search" label="Search"></v-text-field>
+      <v-text-field
+        hide-details
+        solo
+        prepend-inner-icon="search"
+        :label="$t('components.layout.search.label')"
+      ></v-text-field>
     </v-app-bar>
     <v-content>
       <v-container grid-list-lg>
@@ -62,7 +67,7 @@
           localePath({
             name: 'category',
             params: {
-              category: $t(`categories.${cat.id}.route`),
+              category: $t(`categories.${cat.id}.slug`),
             },
           })
         "

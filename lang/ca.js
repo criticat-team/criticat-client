@@ -2,30 +2,53 @@ export default {
   categories: {
     movies: {
       name: 'Pel·lícules',
-      route: 'pelicules',
+      slug: 'pelicules',
     },
     tv: {
       name: 'Sèries',
-      route: 'series',
+      slug: 'series',
     },
     books: {
       name: 'Llibres',
-      route: 'llibres',
+      slug: 'llibres',
     },
     games: {
       name: 'Videojocs',
-      route: 'videojocs',
+      slug: 'videojocs',
     },
   },
-  sections: {
+  pages: {
     home: {
       name: 'Inici',
+      slug: 'pelicules',
     },
     browser: {
       name: 'Navegador',
+      slug: 'navegador',
     },
     articles: {
       name: 'Notícies',
+      slug: 'noticies',
+    },
+  },
+  components: {
+    layout: {
+      search: {
+        label: 'Cerca',
+      },
+    },
+    ui: {
+      slider: {
+        show_more_button: `Mostra'n més`,
+      },
+    },
+    articles: {
+      item: {
+        button: 'Continua llegint',
+      },
+      slider: {
+        title: 'Darreres notícies',
+      },
     },
   },
 };
