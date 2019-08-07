@@ -95,6 +95,7 @@ export default {
       visibleTab: null,
       drawer: null,
       title: 'Criticat',
+      metaThemeColor: null,
     };
   },
   head() {
@@ -105,7 +106,7 @@ export default {
         {
           hid: 'theme-color',
           name: 'theme-color',
-          content: this.$vuetify.theme.currentTheme.primary,
+          content: this.metaThemeColor,
         },
       ],
     };
@@ -116,19 +117,28 @@ export default {
     permanentDrawer() {
       return this.$vuetify.breakpoint.mdAndUp;
     },
+    themeColor() {
+      return this.category != null ? this.category.color : colors.grey.darken3;
+    },
   },
   watch: {
-    category() {
-      this.updateSelectedTab();
+    themeColor() {
+      this.updateThemeColor();
+      setTimeout(() => {
+        this.metaThemeColor = this.themeColor;
+      });
     },
   },
   created() {
-    this.updateSelectedTab();
+    this.updateThemeColor();
+    this.updateMetaThemeColor();
   },
   methods: {
-    updateSelectedTab() {
-      this.$vuetify.theme.currentTheme.primary =
-        this.category != null ? this.category.color : colors.grey.darken3;
+    updateThemeColor() {
+      this.$vuetify.theme.currentTheme.primary = this.themeColor;
+    },
+    updateMetaThemeColor() {
+      this.metaThemeColor = this.themeColor;
     },
   },
 };
