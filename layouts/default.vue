@@ -102,7 +102,11 @@ export default {
       title: this.title,
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        { hid: 'theme-color', name: 'theme-color', content: this.$vuetify.theme.primary },
+        {
+          hid: 'theme-color',
+          name: 'theme-color',
+          content: this.$vuetify.theme.currentTheme.primary,
+        },
       ],
     };
   },
