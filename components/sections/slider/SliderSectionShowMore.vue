@@ -20,7 +20,7 @@
         v-for="cat in categories"
         :key="cat.id"
         :elevation="6"
-        :to="localePath({ ...route, params: { category: $t(`categories.${cat.id}.slug`) } })"
+        :to="localePath({ ...route, params: { category: cat.slug } })"
         nuxt
         fab
         dark
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import categories from '@/assets/js/categories';
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -52,8 +52,10 @@ export default {
   data() {
     return {
       speedDial: false,
-      categories,
     };
+  },
+  computed: {
+    ...mapGetters(['categories']),
   },
 };
 </script>

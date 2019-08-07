@@ -12,6 +12,7 @@
 import ArticlesSlider from '@/components/articles/ArticlesSlider';
 
 export default {
+  name: 'Index',
   components: {
     ArticlesSlider,
   },

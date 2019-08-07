@@ -2,13 +2,13 @@
   <div>
     <v-list flat>
       <v-list-item
-        v-for="(page, n) in visiblePages"
-        :key="n"
+        v-for="page in compatiblePages"
+        :key="page.id"
         :to="
           localePath({
             name: page.routeName,
             params: {
-              category: $t(`categories.${category.id}.slug`),
+              category: category.slug,
             },
           })
         "
@@ -19,7 +19,7 @@
           <v-icon>{{ page.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="$t(`pages.${page.id}.name`)" />
+          <v-list-item-title v-text="page.name" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -27,23 +27,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import pages from '@/assets/js/pages';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       visibleTab: null,
-      pages: Object.values(pages),
     };
   },
   computed: {
-    ...mapState(['category']),
-    visiblePages() {
-      return this.category !== null
-        ? this.pages.filter(page => page.compatibility.includes(this.category.id))
-        : [];
-    },
+    ...mapState(['category', 'pages']),
+    ...mapGetters(['compatiblePages']),
   },
 };
 </script>

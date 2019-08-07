@@ -22,15 +22,15 @@
             localePath({
               name: 'category',
               params: {
-                category: $t(`categories.${cat.id}.slug`),
+                category: cat.slug,
               },
             })
           "
           nuxt
           :color="cat.color"
         >
-          <span>{{ $t(`categories.${cat.id}.name`) }}</span>
-          <v-icon>{{ cat.icon }}</v-icon>
+          <span v-text="cat.name"></span>
+          <v-icon v-text="cat.icon"></v-icon>
         </v-btn>
       </v-bottom-navigation>
       <layout-menu class="navigation-drawer__sections" :category="category" />
@@ -67,25 +67,24 @@
           localePath({
             name: 'category',
             params: {
-              category: $t(`categories.${cat.id}.slug`),
+              category: cat.slug,
             },
           })
         "
         nuxt
         :color="cat.color"
       >
-        <span>{{ $t(`categories.${cat.id}.name`) }}</span>
-        <v-icon>{{ cat.icon }}</v-icon>
+        <span v-text="cat.name"></span>
+        <v-icon v-text="cat.icon"></v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-app>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import colors from 'vuetify/es5/util/colors';
 import LayoutMenu from '@/components/layout/menu';
-import categories from '@/assets/js/categories';
 
 export default {
   components: {
@@ -94,7 +93,6 @@ export default {
   data() {
     return {
       visibleTab: null,
-      categories,
       drawer: null,
       title: 'Criticat',
     };
@@ -110,6 +108,7 @@ export default {
   },
   computed: {
     ...mapState(['category']),
+    ...mapGetters(['categories']),
     permanentDrawer() {
       return this.$vuetify.breakpoint.mdAndUp;
     },

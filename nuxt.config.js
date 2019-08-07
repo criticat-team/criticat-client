@@ -94,6 +94,11 @@ export default {
     langDir: 'lang',
     detectBrowserLanguage: false,
     lazy: true,
+    vuex: {
+      syncLocale: true,
+      syncMessages: true,
+      syncRouteParams: true,
+    },
     vueI18n: {
       fallbackLocale: 'ca',
     },

@@ -12,13 +12,9 @@
 import ArticlesSlider from '@/components/articles/ArticlesSlider';
 
 export default {
+  name: 'CategoryIndex',
   components: {
     ArticlesSlider,
-  },
-  data() {
-    return {
-      category: undefined,
-    };
   },
   asyncData({ store }) {
     return {

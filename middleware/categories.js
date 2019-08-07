@@ -1,10 +1,13 @@
-import categories from '@/assets/js/categories';
-
 export default function({ params, store, redirect, app }) {
-  if (params.category) {
-    const category = Object.values(categories).find(cat => {
-      return app.i18n.t(`categories.${cat.id}.slug`) === params.category;
-    });
+  const currentCategory = store.state.category;
+  if (
+    (currentCategory === null && params.category === undefined) ||
+    (currentCategory !== null && params.category === currentCategory.slug)
+  ) {
+    return;
+  }
+  if (params.category !== undefined) {
+    const category = store.getters.getCategoryBySlug(params.category);
     if (category) {
       store.commit('setCategory', category);
     } else {

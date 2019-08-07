@@ -6,24 +6,16 @@
 
 <script>
 import ArticlesList from '@/components/articles/ArticlesList';
-import pages from '@/assets/js/pages';
 
 export default {
-  meta: {
-    compatibility: pages.articles.compatibility,
-  },
   nuxtI18n: {
     paths: {
       ca: '/:category/noticies',
     },
   },
+  name: 'CategoryArticles',
   components: {
     ArticlesList,
-  },
-  data() {
-    return {
-      category: undefined,
-    };
   },
   asyncData({ store }) {
     return {

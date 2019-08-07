@@ -5,22 +5,13 @@
 </template>
 
 <script>
-import pages from '@/assets/js/pages';
-
 export default {
-  meta: {
-    compatibility: pages.browser.compatibility,
-  },
   nuxtI18n: {
     paths: {
       ca: '/:category/navegador',
     },
   },
-  data() {
-    return {
-      category: undefined,
-    };
-  },
+  name: 'CategoryBrowser',
   asyncData({ store }) {
     return {
       category: store.state.category,
