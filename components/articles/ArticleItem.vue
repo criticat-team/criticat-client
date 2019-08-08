@@ -2,7 +2,7 @@
   <div>
     <v-hover v-if="compact">
       <template v-slot:default="{ hover }">
-        <v-card :elevation="elevation" class="article-item" tag="article">
+        <v-card :elevation="elevation" class="article-item article-item--compact" tag="article">
           <v-img
             class="article-item__image white--text grey lighten-2"
             :src="image"
@@ -33,12 +33,7 @@
           </v-img>
           <loading-overlay :active="!loaded" />
           <v-fade-transition>
-            <v-overlay
-              v-show="loaded && hover"
-              class="article-item__button-overlay"
-              absolute
-              color="black"
-            >
+            <v-overlay v-show="loaded && hover" class="article-item__button-overlay" absolute>
               <v-btn
                 :href="url"
                 :color="categoryColor"
@@ -196,6 +191,14 @@ export default {
 
   &__button-overlay {
     touch-action: auto;
+  }
+
+  &--compact {
+    .article-item {
+      &__image {
+        border-radius: 4px;
+      }
+    }
   }
 }
 </style>
