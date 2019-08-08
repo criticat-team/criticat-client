@@ -1,7 +1,8 @@
-query articles($category: String!, $itemsPerPage: Int!, $continuation: String) {
+query articles($category: String, $itemsPerPage: Int!, $continuation: String) {
   articles(category: $category, itemsPerPage: $itemsPerPage, continuation: $continuation) {
     items {
       id
+      categories
       title
       content
       published

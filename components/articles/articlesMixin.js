@@ -38,7 +38,7 @@ const articlesMixin = {
       );
     },
     categoryKey() {
-      return this.category ? this.category.id : 'all';
+      return this.category ? this.category.id : undefined;
     },
   },
   apollo: {

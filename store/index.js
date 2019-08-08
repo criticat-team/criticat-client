@@ -32,6 +32,8 @@ export const getters = {
         name,
       };
     }),
+  getCategoryById: (state, getters) => id =>
+    getters.categories.find(category => category.id === id),
   getCategoryBySlug: (state, getters) => slug =>
     getters.categories.find(category => category.slug === slug),
   getPageBySlug: (state, getters) => slug => getters.pages.find(page => page.slug === slug),

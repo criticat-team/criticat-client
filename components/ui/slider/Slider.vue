@@ -12,7 +12,7 @@
     /></slider-content>
     <template v-if="showButtons">
       <v-btn
-        class="slider__button white"
+        class="slider__button white primary--text"
         :class="{ 'slider__button--hidden': !leftButtonIsVisible }"
         :style="{ left: `${12 + outerGap}px` }"
         absolute
@@ -24,7 +24,7 @@
         <v-icon>chevron_left</v-icon>
       </v-btn>
       <v-btn
-        class="slider__button white"
+        class="slider__button white primary--text"
         :class="{ 'slider__button--hidden': !rightButtonIsVisible }"
         :style="{ right: `${12 + outerGap}px` }"
         absolute
@@ -155,7 +155,7 @@ export default {
     padding: 8px 0;
   }
   &__button {
-    z-index: 4; // Higher than overlay
+    z-index: 5; // Higher than overlay
     top: 0;
     bottom: 0;
     margin: auto;
