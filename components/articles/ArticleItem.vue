@@ -42,9 +42,8 @@
           target="_blank"
           text
           color="primary"
-        >
-          Continua llegint
-        </v-btn>
+          v-text="$t('components.articles.item.button')"
+        />
       </v-card-actions>
     </template>
   </v-card>

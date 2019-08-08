@@ -8,17 +8,18 @@
 import ArticlesList from '@/components/articles/ArticlesList';
 
 export default {
+  nuxtI18n: {
+    paths: {
+      ca: '/:category/noticies',
+    },
+  },
+  name: 'CategoryArticles',
   components: {
     ArticlesList,
   },
-  data() {
+  asyncData({ store }) {
     return {
-      category: undefined,
-    };
-  },
-  asyncData({ params }) {
-    return {
-      category: params.category,
+      category: store.state.category,
     };
   },
 };

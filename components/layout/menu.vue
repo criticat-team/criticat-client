@@ -2,22 +2,24 @@
   <div>
     <v-list flat>
       <v-list-item
-        v-for="(section, n) in visibleSections"
-        :key="n"
-        :to="{
-          name: section.route,
-          params: {
-            category: category.id,
-          },
-        }"
+        v-for="page in compatiblePages"
+        :key="page.id"
+        :to="
+          localePath({
+            name: page.routeName,
+            params: {
+              category: category.slug,
+            },
+          })
+        "
         nuxt
         exact
       >
         <v-list-item-action>
-          <v-icon>{{ section.icon }}</v-icon>
+          <v-icon>{{ page.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="section.title" />
+          <v-list-item-title v-text="page.name" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -25,27 +27,17 @@
 </template>
 
 <script>
-import sections from '@/assets/js/sections';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
-  props: {
-    category: {
-      type: Object,
-      default: null,
-    },
-  },
   data() {
     return {
       visibleTab: null,
-      sections: Object.values(sections),
     };
   },
   computed: {
-    visibleSections() {
-      return this.category !== null
-        ? this.sections.filter(section => section.compatibility.includes(this.category.id))
-        : [];
-    },
+    ...mapState(['category', 'pages']),
+    ...mapGetters(['compatiblePages']),
   },
 };
 </script>

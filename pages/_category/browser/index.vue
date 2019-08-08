@@ -1,19 +1,20 @@
 <template>
   <div>
-    <h1>Browsing in {{ category }}</h1>
+    <h1>Browsing in {{ $t(`categories.${category.id}.name`) }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      category: undefined,
-    };
+  nuxtI18n: {
+    paths: {
+      ca: '/:category/navegador',
+    },
   },
-  asyncData({ params }) {
+  name: 'CategoryBrowser',
+  asyncData({ store }) {
     return {
-      category: params.category,
+      category: store.state.category,
     };
   },
 };

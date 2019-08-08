@@ -3,7 +3,7 @@
     :width="280"
     :inner-gap="12"
     :card-container="cardContainer"
-    title="Articles"
+    :title="$t('components.articles.slider.title')"
     :show-more-route="{ name: 'category-articles' }"
     :category="category"
   >

@@ -29,7 +29,7 @@ export default {
   },
   props: {
     category: {
-      type: String,
+      type: Object,
       mandatory: true,
       default: null,
     },

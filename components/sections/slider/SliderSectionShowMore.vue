@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nuxt-link v-if="category !== null" class="show-more-link" :to="route">
-      Show more
+    <nuxt-link v-if="category !== null" class="show-more-link" :to="localePath(route)">
+      {{ $t('components.ui.slider.show_more_button') }}
     </nuxt-link>
     <v-speed-dial
       v-else
@@ -12,14 +12,15 @@
     >
       <template #activator>
         <div class="show-more-buttons__text primary--text">
-          Show more<v-icon :size="18">{{ speedDial ? 'arrow_drop_up' : 'arrow_drop_down' }}</v-icon>
+          {{ $t('components.ui.slider.show_more_button')
+          }}<v-icon :size="18">{{ speedDial ? 'arrow_drop_up' : 'arrow_drop_down' }}</v-icon>
         </div>
       </template>
       <v-btn
         v-for="cat in categories"
         :key="cat.id"
         :elevation="6"
-        :to="{ ...route, params: { category: cat.id } }"
+        :to="localePath({ ...route, params: { category: cat.slug } })"
         nuxt
         fab
         dark
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import categories from '@/assets/js/categories';
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -43,7 +44,7 @@ export default {
       default: null,
     },
     category: {
-      type: String,
+      type: Object,
       mandatory: true,
       default: null,
     },
@@ -51,8 +52,10 @@ export default {
   data() {
     return {
       speedDial: false,
-      categories,
     };
+  },
+  computed: {
+    ...mapGetters(['categories']),
   },
 };
 </script>
