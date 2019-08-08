@@ -34,7 +34,7 @@
           <loading-overlay :active="!loaded" />
           <v-fade-transition>
             <v-overlay
-              v-show="loaded && hover"
+              v-if="loaded && hover"
               class="article-item__button-overlay"
               absolute
               color="black"
