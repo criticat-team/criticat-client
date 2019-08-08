@@ -19,6 +19,7 @@
                     :color="categoryColor"
                     class="overline white--text px-2 py-1"
                     style="border-radius: 4px 0 4px 0;"
+                    :elevation="2"
                     v-text="origin"
                   />
                 </v-layout>
