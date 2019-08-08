@@ -65,7 +65,7 @@ export default {
   text-decoration: none;
 }
 .show-more-buttons {
-  z-index: 5;
+  z-index: 6;
   &__text {
     cursor: pointer;
   }

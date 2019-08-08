@@ -44,7 +44,7 @@ export default {
     },
     articles: {
       item: {
-        button: 'Continua llegint',
+        button: `Anar a l'article`,
       },
       slider: {
         title: 'Darreres notícies',
