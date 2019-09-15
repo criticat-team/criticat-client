@@ -8,7 +8,7 @@
 export default {
   nuxtI18n: {
     paths: {
-      ca: '/:category/navegador',
+      ca: '/:category/explora',
     },
   },
   name: 'CategoryBrowser',

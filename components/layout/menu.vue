@@ -13,7 +13,7 @@
           })
         "
         nuxt
-        exact
+        :exact="page.exact"
       >
         <v-list-item-action>
           <v-icon>{{ page.icon }}</v-icon>

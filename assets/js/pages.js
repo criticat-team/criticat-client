@@ -11,12 +11,14 @@ export default {
       categories.books.id,
       categories.games.id,
     ],
+    exact: true,
   },
   browser: {
     id: 'browser',
     icon: 'list',
     routeName: 'category-browser',
     compatibility: [categories.movies.id, categories.tv.id],
+    exact: false,
   },
   articles: {
     id: 'articles',
@@ -28,5 +30,6 @@ export default {
       categories.books.id,
       categories.games.id,
     ],
+    exact: false,
   },
 };

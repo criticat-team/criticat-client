@@ -23,8 +23,8 @@ export default {
       slug: 'pelicules',
     },
     browser: {
-      name: 'Navegador',
-      slug: 'navegador',
+      name: 'Explora',
+      slug: 'explora',
     },
     articles: {
       name: 'Notícies',

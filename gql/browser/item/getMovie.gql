@@ -1,0 +1,6 @@
+query movie($id: ID!, $language: String) {
+  movie(id: $id, language: $language) {
+    id
+    title
+  }
+}

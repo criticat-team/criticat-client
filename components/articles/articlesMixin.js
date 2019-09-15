@@ -1,4 +1,4 @@
-import getArticlesGql from '@/gql/getArticles.gql';
+import getArticlesGql from '@/gql/articles/getArticles.gql';
 
 const articlesMixin = {
   props: {
