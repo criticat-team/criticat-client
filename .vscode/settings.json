@@ -16,5 +16,8 @@
   "eslint.autoFixOnSave": true,
   "editor.formatOnSave": true,
   "vetur.validation.template": true,
-  "vetur.format.defaultFormatter.html": "prettier"
+  "vetur.format.defaultFormatter.html": "prettier",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

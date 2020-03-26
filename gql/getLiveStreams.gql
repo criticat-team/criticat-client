@@ -1,0 +1,18 @@
+query liveStreams($language: String!, $itemsPerPage: Int!, $offset: Int) {
+  liveStreams(language: $language, itemsPerPage: $itemsPerPage, offset: $offset) {
+    _total
+    streams {
+      _id
+      game
+      channel {
+        display_name
+        status
+      }
+      preview {
+        small
+        medium
+        large
+      }
+    }
+  }
+}
