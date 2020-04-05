@@ -34,3 +34,8 @@ jobs:
       # run tests!
       - run: npm run test:unit
       - run: npm run test:e2e -- --headless
+      - store_artifacts:
+          path: tests\e2e\videos
+      - store_artifacts:
+          path: tests\e2e\screenshots
+
