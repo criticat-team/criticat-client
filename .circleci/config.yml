@@ -9,4 +9,5 @@ workflows:
       - cypress/run:
           requires:
             - cypress/install
+          wait-on: 'http://localhost:8080'
           start: 'npm run serve-dist'  # start server before running tests
