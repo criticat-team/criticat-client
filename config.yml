@@ -34,5 +34,3 @@ jobs:
       # run tests!
       - run: npm run test:unit
       - run: npm run test:e2e -- --headless
-
-
