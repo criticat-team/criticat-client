@@ -9,4 +9,4 @@ workflows:
       - cypress/run:
           requires:
             - cypress/install
-          start: 'npm serve-dist'  # start server before running tests
+          start: 'npm run serve-dist'  # start server before running tests
