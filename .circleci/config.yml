@@ -4,4 +4,9 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run
+      - cypress/install:
+          build: npm run build
+      - cypress/run:
+          requires:
+            - cypress/install
+          start: 'npm serve-dist'  # start server before running tests
