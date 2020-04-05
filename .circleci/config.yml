@@ -19,17 +19,17 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - cache-{{ checksum "package.json" }}
 
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
+          key: cache-{{ checksum "package.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - ~/.npm
+            - ~/.cache
 
       # run tests!
       - run: npm run test:unit
