@@ -9,7 +9,7 @@ module.exports = {
   client: {
     service: {
       name: 'criticat-client',
-      url: env.VUE_APP_APOLLO_ENGINE_SERVICE,
+      url: env.VUE_APP_GRAPHQL_HTTP,
     },
     includes: ['src/**/*.{js,jsx,ts,tsx,vue,gql}'],
   },
