@@ -8,9 +8,10 @@
           cover
         >
           <v-sheet
+            v-if="category"
             :height="22"
             tile
-            :color="category && category.color"
+            :color="category.color"
             class="overline white--text px-2 py-1"
             style="border-radius: 0 0 4px 0; position: absolute;"
             :elevation="2"
@@ -30,13 +31,19 @@
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
 import store from '@/store';
+import { Article } from '@/generated/graphql';
+import { CategoryId } from '../../config/categories';
 
 export default defineComponent({
   props: {
-    article: Object,
+    article: Object as () => Article,
   },
   setup(props) {
-    const category = computed(() => store.state.categories[props.article.categories[0]]);
+    const category = computed(() =>
+      props.article != null && props.article.categories != null
+        ? store.state.categories[props.article.categories[0] as CategoryId]
+        : null,
+    );
     return { category };
   },
 });

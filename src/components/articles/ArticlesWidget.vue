@@ -12,11 +12,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
+import { defineComponent, computed, ref } from '@vue/composition-api';
 import { CategoryId } from '@/config/categories';
-import { useQuery } from '@vue/apollo-composable';
-import gql from 'graphql-tag';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
+import { useGetArticlesQuery } from '@/generated/graphql';
 
 export default defineComponent({
   props: {
@@ -29,28 +28,11 @@ export default defineComponent({
     const numberOfItems = 12;
 
     const articlesCategory = computed(() => props.categoryId || 'all');
-    const { result, loading } = useQuery(
-      gql`
-        query getArticles($category: String!, $itemsPerPage: Int, $continuation: String) {
-          articles(category: $category, itemsPerPage: $itemsPerPage, continuation: $continuation) {
-            items {
-              id
-              title
-              image
-              url
-              origin {
-                title
-              }
-              categories
-            }
-            continuation
-          }
-        }
-      `,
-      {
+    const { result, loading } = useGetArticlesQuery(
+      ref({
         category: articlesCategory,
         itemsPerPage: numberOfItems,
-      },
+      }),
     );
 
     const items = computed(() =>

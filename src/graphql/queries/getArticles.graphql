@@ -1,0 +1,15 @@
+query getArticles($category: String!, $itemsPerPage: Int, $continuation: String) {
+  articles(category: $category, itemsPerPage: $itemsPerPage, continuation: $continuation) {
+    items {
+      id
+      title
+      image
+      url
+      origin {
+        title
+      }
+      categories
+    }
+    continuation
+  }
+}
