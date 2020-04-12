@@ -7,13 +7,14 @@
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
 import ArticlesWidget from '@/components/articles/ArticlesWidget.vue';
+import store from '@/store';
 
 export default defineComponent({
   components: {
     ArticlesWidget,
   },
-  setup(props, context) {
-    const currentCategoryId = computed(() => context.root.$store.state.currentCategoryId);
+  setup() {
+    const currentCategoryId = computed(() => store.state.currentCategoryId);
     return {
       currentCategoryId,
     };

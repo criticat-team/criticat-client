@@ -17,7 +17,7 @@ new Vue({
     return {};
   },
   router,
-  store,
+  store: store.original,
   vuetify,
   render: (h) => h(App),
 }).$mount('#app');

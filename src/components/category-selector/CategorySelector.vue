@@ -19,15 +19,16 @@
 import { defineComponent, computed } from '@vue/composition-api';
 import AppLogoContainer from '@/components/logo/AppLogoContainer.vue';
 import AppLogoItem from '@/components/logo/AppLogoItem.vue';
+import store from '@/store';
 
 export default defineComponent({
   components: {
     AppLogoContainer,
     AppLogoItem,
   },
-  setup(props, context) {
-    const currentCategory = computed(() => context.root.$store.getters.currentCategory);
-    const categories = computed(() => context.root.$store.state.categories);
+  setup() {
+    const currentCategory = computed(() => store.getters.currentCategory);
+    const categories = computed(() => store.state.categories);
     const items = computed(() => [
       ...Object.values(categories.value).map((category) => ({
         route: { name: 'category.home', params: { categoryId: category.id } },

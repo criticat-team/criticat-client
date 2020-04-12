@@ -1,4 +1,4 @@
-import { Category } from '../index.d';
+import { Category } from '../index';
 import colors from 'vuetify/src/util/colors';
 import { mdiTelevision } from '@mdi/js';
 

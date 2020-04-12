@@ -29,15 +29,14 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
+import store from '@/store';
 
 export default defineComponent({
   props: {
     article: Object,
   },
-  setup(props, context) {
-    const category = computed(
-      () => context.root.$store.state.categories[props.article.categories[0]],
-    );
+  setup(props) {
+    const category = computed(() => store.state.categories[props.article.categories[0]]);
     return { category };
   },
 });

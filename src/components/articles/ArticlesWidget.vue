@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-import { CategoryId } from '@/config/categories/index.d';
+import { CategoryId } from '@/config/categories';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';

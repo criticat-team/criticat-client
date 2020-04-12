@@ -33,6 +33,7 @@ import { defineComponent, watch, computed } from '@vue/composition-api';
 import CategorySelector from '@/components/category-selector/CategorySelector.vue';
 import AppLogo from '@/components/logo/AppLogo.vue';
 import { mdiMagnify } from '@mdi/js';
+import store from '@/store';
 
 export default defineComponent({
   name: 'App',
@@ -41,15 +42,15 @@ export default defineComponent({
     AppLogo,
   },
   setup(props, context) {
-    const categories = context.root.$store.state.categories;
+    const categories = store.state.categories;
 
     const currentCategoryId = computed(() => context.root.$route.params.categoryId);
     watch(currentCategoryId, (currentCategoryId) => {
-      context.root.$store.dispatch('setCurrentCategoryId', currentCategoryId);
+      store.dispatch.setCurrentCategoryId(currentCategoryId);
     });
 
     // Change primary color based on category
-    const currentCategory = computed(() => context.root.$store.getters.currentCategory);
+    const currentCategory = computed(() => store.getters.currentCategory);
     watch(currentCategory, (currentCategory) => {
       context.root.$vuetify.theme.currentTheme.primary = currentCategory
         ? currentCategory.color

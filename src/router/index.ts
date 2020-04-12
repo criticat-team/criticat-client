@@ -5,7 +5,7 @@ import Category from '@/views/Category.vue';
 import CategoryHome from '@/views/CategoryHome.vue';
 import CategoryArticles from '@/views/CategoryArticles.vue';
 import { HOME, CATEGORY__HOME, CATEGORY__ARTICLES } from './constants';
-import categories from '@/config/categories';
+import { CategoryTypesEnum } from '@/config/categories';
 
 Vue.use(VueRouter);
 
@@ -20,10 +20,10 @@ const routes: RouteConfig[] = [
     component: Category,
     props: true,
     beforeEnter(to, from, next) {
-      if (categories[to.params.categoryId] == null) {
-        next({ name: HOME });
-      } else {
+      if (to.params.categoryId in CategoryTypesEnum) {
         next();
+      } else {
+        next({ name: HOME });
       }
     },
     children: [

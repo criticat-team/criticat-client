@@ -14,14 +14,15 @@
 import { defineComponent, computed } from '@vue/composition-api';
 import AppLogoContainer from './AppLogoContainer.vue';
 import AppLogoItem from './AppLogoItem.vue';
+import store from '@/store';
 
 export default defineComponent({
   components: {
     AppLogoContainer,
     AppLogoItem,
   },
-  setup(props, context) {
-    const categories = computed(() => context.root.$store.state.categories);
+  setup() {
+    const categories = computed(() => store.state.categories);
     const items = computed(() => [
       ...Object.values(categories.value).map((category) => ({
         color: category.color,

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import { CategoryId } from '@/config/categories/index.d';
+import { CategoryId } from '@/config/categories';
 
 export default defineComponent({
   props: {
