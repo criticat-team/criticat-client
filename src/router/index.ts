@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue';
 import Category from '@/views/Category.vue';
 import CategoryHome from '@/views/CategoryHome.vue';
 import CategoryArticles from '@/views/CategoryArticles.vue';
-import { HOME, CATEGORY, CATEGORY__HOME, CATEGORY__ARTICLES } from './constants';
+import { HOME, CATEGORY__HOME, CATEGORY__ARTICLES } from './constants';
 import categories from '@/config/categories';
 
 Vue.use(VueRouter);
@@ -17,7 +17,6 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/:categoryId',
-    name: CATEGORY,
     component: Category,
     props: true,
     beforeEnter(to, from, next) {
@@ -29,7 +28,7 @@ const routes: RouteConfig[] = [
     },
     children: [
       {
-        path: '/',
+        path: '',
         name: CATEGORY__HOME,
         component: CategoryHome,
       },

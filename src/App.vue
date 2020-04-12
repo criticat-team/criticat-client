@@ -1,20 +1,27 @@
 <template>
   <v-app>
-    <v-navigation-drawer permanent app dark>
-      <v-list>
-        <v-list-item :to="{ name: 'home' }" exact>
-          Home
-        </v-list-item>
-        <v-list-item
-          v-for="category in categories"
-          :key="category.id"
-          :to="{ name: 'category.home', params: { categoryId: category.id } }"
-        >
-          {{ category.id }}
-        </v-list-item>
-      </v-list>
+    <v-navigation-drawer permanent app dark :mini-variant="false" :expand-on-hover="false">
+      <div class="my-3 mx-3">
+        <v-text-field
+          flat
+          solo-inverted
+          hide-details
+          :prepend-inner-icon="mdiMagnify"
+          label="Search"
+        />
+      </div>
+      <div class="my-3 mx-3">
+        <category-selector />
+      </div>
+      <template #append>
+        <div class="my-10 d-flex align-center justify-center">
+          <div style="width: 32px; height: 32px;" class="mr-2 flex-shrink-0">
+            <app-logo />
+          </div>
+          <div class="text-center headline white--text" style="cursor: default;">CRITICAT</div>
+        </div>
+      </template>
     </v-navigation-drawer>
-    <v-app-bar app color="primary" dark></v-app-bar>
     <v-content>
       <router-view />
     </v-content>
@@ -23,42 +30,32 @@
 
 <script lang="ts">
 import { defineComponent, watch, computed } from '@vue/composition-api';
-import { useQuery, useMutation, useResult } from '@vue/apollo-composable';
-import { categoriesQuery } from '@/state/queries';
-import { setCurrentCategoryMutation } from '@/state/mutations';
-import useCurrentCategory from '@/composables/use-current-category';
+import CategorySelector from '@/components/category-selector/CategorySelector.vue';
+import AppLogo from '@/components/logo/AppLogo.vue';
+import { mdiMagnify } from '@mdi/js';
 
 export default defineComponent({
   name: 'App',
+  components: {
+    CategorySelector,
+    AppLogo,
+  },
   setup(props, context) {
-    const { result: categoriesResult } = useQuery(categoriesQuery);
-    const categories = useResult(categoriesResult);
-    const { mutate: setCurrentCategory } = useMutation(setCurrentCategoryMutation, {
-      optimisticResponse: true,
-    });
+    const categories = context.root.$store.state.categories;
+
     const currentCategoryId = computed(() => context.root.$route.params.categoryId);
+    watch(currentCategoryId, (currentCategoryId) => {
+      context.root.$store.dispatch('setCurrentCategoryId', currentCategoryId);
+    });
 
-    // TODO: The following lines can be removed if lazy === true. It should behave the same way
-    console.log('before');
-    setCurrentCategory({ id: currentCategoryId.value });
-    console.log('after');
-    watch(
-      currentCategoryId,
-      (categoryId) => {
-        console.log('before');
-        setCurrentCategory({ id: categoryId });
-        console.log('after');
-      },
-      { lazy: true },
-    );
-
-    const { category: currentCategory } = useCurrentCategory();
+    // Change primary color based on category
+    const currentCategory = computed(() => context.root.$store.getters.currentCategory);
     watch(currentCategory, (currentCategory) => {
       context.root.$vuetify.theme.currentTheme.primary = currentCategory
         ? currentCategory.color
         : '#333333';
     });
-    return { categories };
+    return { categories, currentCategory, mdiMagnify };
   },
 });
 </script>

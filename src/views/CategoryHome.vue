@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <h1>Category Home</h1>
-    <articles-widget v-if="category" :category-id="category.id" />
+  <div class="my-2">
+    <articles-widget :category-id="currentCategoryId" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, computed } from '@vue/composition-api';
 import ArticlesWidget from '@/components/articles/ArticlesWidget.vue';
-import useCurrentCategory from '@/composables/use-current-category';
 
 export default defineComponent({
   components: {
     ArticlesWidget,
   },
-  setup() {
-    const { category } = useCurrentCategory();
+  setup(props, context) {
+    const currentCategoryId = computed(() => context.root.$store.state.currentCategoryId);
     return {
-      category,
+      currentCategoryId,
     };
   },
 });

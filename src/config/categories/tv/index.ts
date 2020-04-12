@@ -1,10 +1,12 @@
 import { Category } from '../index.d';
 import colors from 'vuetify/src/util/colors';
+import { mdiTelevision } from '@mdi/js';
 
 const category: Category = {
   id: 'tv',
-  icon: 'tv',
+  icon: mdiTelevision,
   color: colors.orange.darken3,
+  position: 'bottom',
 };
 
 export default category;
