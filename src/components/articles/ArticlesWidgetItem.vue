@@ -3,7 +3,7 @@
     :width="width"
     :height="height"
     type="image"
-    :loading="item.loading"
+    :loading="item.loading || !item.article"
     transition="fade-transition"
   >
     <articles-widget-item-article :style="articleStyle" :article="item.article" />
