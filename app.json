@@ -15,7 +15,7 @@
     "NPM_CONFIG_PRODUCTION": {
       "required": true
     },
-    "APOLLO_HTTP_ENDPOINT": {
+    "VUE_APP_GRAPHQL_HTTP": {
       "required": true
     }
   },
