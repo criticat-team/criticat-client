@@ -3,8 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "serve": "concurrently --raw \"vue-cli-service serve\" \"graphql-codegen --watch\"",
-    "build": "graphql-codegen && vue-cli-service build",
+    "dev": "concurrently --raw \"npm run serve\" \"graphql-codegen --watch\"",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "serve-dist": "http-server dist",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
