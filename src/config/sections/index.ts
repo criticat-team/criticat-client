@@ -20,7 +20,7 @@ export default [
     id: 'articles',
     title: 'Articles',
     icon: mdiNewspaperVariantMultiple,
-    categories: [categories.books, categories.games, categories.movies],
+    categories: [categories.books, categories.games, categories.movies, categories.tv],
     route: {
       path: 'articles',
       name: CATEGORY__ARTICLES,

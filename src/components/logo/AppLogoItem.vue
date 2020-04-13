@@ -4,7 +4,7 @@
     :class="classes"
     @click="$emit('click', $event)"
     :points="points"
-    :fill="active ? color : '#565656'"
+    :fill="active ? color : 'rgba(255, 255, 255, 0.16)'"
   >
   </polygon>
 </template>

@@ -4,6 +4,7 @@
       permanent
       app
       dark
+      color="grey darken-4"
       :mini-variant="false"
       :expand-on-hover="false"
       mini-variant-width="80"
@@ -21,8 +22,10 @@
         <category-selector />
       </div>
       <div class="my-3 mx-3">
-        <v-list>
+        <v-list class="pa-0">
           <v-list-item
+            color="primary"
+            class="my-3"
             v-for="(section, index) in sections"
             :key="index"
             :to="{ name: section.route.name }"
