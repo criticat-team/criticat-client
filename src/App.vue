@@ -1,6 +1,13 @@
 <template>
   <v-app>
-    <v-navigation-drawer permanent app dark :mini-variant="false" :expand-on-hover="false">
+    <v-navigation-drawer
+      permanent
+      app
+      dark
+      :mini-variant="false"
+      :expand-on-hover="false"
+      mini-variant-width="80"
+    >
       <div class="my-3 mx-3">
         <v-text-field
           flat
@@ -12,6 +19,23 @@
       </div>
       <div class="my-3 mx-3">
         <category-selector />
+      </div>
+      <div class="my-3 mx-3">
+        <v-list>
+          <v-list-item
+            v-for="(section, index) in sections"
+            :key="index"
+            :to="{ name: section.route.name }"
+            exact
+          >
+            <v-list-item-icon>
+              <v-icon>{{ section.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              {{ section.title }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
       </div>
       <template #append>
         <div class="my-10 d-flex align-center justify-center">
@@ -56,7 +80,10 @@ export default defineComponent({
         ? currentCategory.color
         : '#333333';
     });
-    return { categories, currentCategory, mdiMagnify };
+
+    const sections = computed(() => store.getters.currentCategorySections);
+
+    return { categories, currentCategory, mdiMagnify, sections };
   },
 });
 </script>

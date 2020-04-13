@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { createDirectStore } from 'direct-vuex';
-import categories, { CategoryMap } from '@/config/categories';
+import categories, { CategoryMap, Category } from '@/config/categories';
+import sections from '@/config/sections';
 import { CategoryId } from '@/config/categories';
 
 Vue.use(Vuex);
@@ -25,6 +26,10 @@ const {
   getters: {
     currentCategory: (state) =>
       state.currentCategoryId != null ? state.categories[state.currentCategoryId] : null,
+    currentCategorySections: (state, getters) =>
+      getters.currentCategory != null ? getters.getSectionsByCategory(getters.currentCategory) : [],
+    getSectionsByCategory: () => (category: Category) =>
+      sections.filter((section) => section.categories.includes(category)),
   },
   mutations: {
     setCurrentCategoryId(state, id) {

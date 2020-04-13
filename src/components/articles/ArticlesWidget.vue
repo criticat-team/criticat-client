@@ -5,21 +5,24 @@
         <articles-widget-item :item="item" />
       </div>
     </div>
-    <div class="mx-3 d-flex justify-end align-end">
-      <a class="overline" :to="{}">Show more</a>
+    <div v-if="categoryArticlesRoute" class="mx-2 d-flex justify-end">
+      <v-btn color="primary" x-small text class="overline" :to="categoryArticlesRoute">
+        Show more
+      </v-btn>
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api';
-import { CategoryId } from '@/config/categories';
+import { Category } from '@/config/categories';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
 import { useGetArticlesQuery } from '@/generated/graphql';
+import { CATEGORY__ARTICLES } from '@/router/constants';
 
 export default defineComponent({
   props: {
-    categoryId: String as () => CategoryId,
+    category: Object as () => Category,
   },
   components: {
     ArticlesWidgetItem,
@@ -27,7 +30,7 @@ export default defineComponent({
   setup(props) {
     const numberOfItems = 12;
 
-    const articlesCategory = computed(() => props.categoryId || 'all');
+    const articlesCategory = computed(() => (props.category ? props.category.id : 'all'));
     const { result, loading } = useGetArticlesQuery(
       ref({
         category: articlesCategory,
@@ -42,9 +45,21 @@ export default defineComponent({
       })),
     );
 
+    const categoryArticlesRoute = computed(() =>
+      props.category
+        ? {
+            name: CATEGORY__ARTICLES,
+            params: {
+              categoryId: props.category.id,
+            },
+          }
+        : null,
+    );
+
     return {
       items,
       numberOfItems,
+      categoryArticlesRoute,
     };
   },
 });

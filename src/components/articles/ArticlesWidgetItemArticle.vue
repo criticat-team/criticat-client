@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="d-flex" style="height: 100%;" :href="article.url" target="_blank">
+  <v-card class="d-flex" style="height: 100%;" :href="article.url" target="_blank">
     <v-hover>
       <template v-slot:default="{ hover }">
         <v-img
