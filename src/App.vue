@@ -28,7 +28,7 @@
             class="my-3"
             v-for="(section, index) in sections"
             :key="index"
-            :to="{ name: section.route.name }"
+            :to="{ name: section.route.name, params: { categoryId: currentCategory.id } }"
             exact
           >
             <v-list-item-icon>
