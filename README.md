@@ -1,4 +1,4 @@
-# criticat-client-new
+# criticat-client
 
 ## Project setup
 ```
