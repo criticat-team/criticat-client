@@ -73,7 +73,7 @@ export default defineComponent({
 
     const currentCategoryId = computed(() => context.root.$route.params.categoryId);
     watch(currentCategoryId, (currentCategoryId) => {
-      store.dispatch.setCurrentCategoryId(currentCategoryId);
+      store.commit.setCurrentCategoryId(currentCategoryId);
     });
 
     // Change primary color based on category

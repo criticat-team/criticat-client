@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api';
-import { Category } from '@/config/categories';
+import { Category } from '@/config/categories/types';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
 import { useGetArticlesQuery } from '@/generated/graphql';
 import { CATEGORY__ARTICLES } from '@/router/constants';

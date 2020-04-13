@@ -8,13 +8,13 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api';
-import { CategoryId } from '@/config/categories';
+import { CategoryEnum } from '@/config/categories/types';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
 import { useGetArticlesQuery } from '@/generated/graphql';
 
 export default defineComponent({
   props: {
-    categoryId: String as () => CategoryId,
+    categoryId: String as () => CategoryEnum,
   },
   components: {
     ArticlesWidgetItem,

@@ -32,7 +32,7 @@
 import { defineComponent, computed } from '@vue/composition-api';
 import store from '@/store';
 import { Article } from '@/generated/graphql';
-import { CategoryId } from '../../config/categories';
+import { CategoryEnum } from '@/config/categories/types';
 
 export default defineComponent({
   props: {
@@ -41,7 +41,7 @@ export default defineComponent({
   setup(props) {
     const category = computed(() =>
       props.article != null && props.article.categories != null
-        ? store.state.categories[props.article.categories[0] as CategoryId]
+        ? store.state.categories[props.article.categories[0] as CategoryEnum]
         : null,
     );
     return { category };

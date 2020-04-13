@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { createDirectStore } from 'direct-vuex';
-import categories, { CategoryMap, Category } from '@/config/categories';
+import categories from '@/config/categories';
+import { CategoryMap, Category, CategoryEnum } from '@/config/categories/types';
 import sections from '@/config/sections';
-import { CategoryId } from '@/config/categories';
 
 Vue.use(Vuex);
 
 type StoreState = {
-  currentCategoryId: CategoryId | null;
+  currentCategoryId: CategoryEnum | null;
   categories: CategoryMap;
 };
 
@@ -29,16 +29,11 @@ const {
     currentCategorySections: (state, getters) =>
       getters.currentCategory != null ? getters.getSectionsByCategory(getters.currentCategory) : [],
     getSectionsByCategory: () => (category: Category) =>
-      sections.filter((section) => section.categories.includes(category)),
+      sections.filter((section) => section.categories.includes(category.id)),
   },
   mutations: {
     setCurrentCategoryId(state, id) {
       state.currentCategoryId = id;
-    },
-  },
-  actions: {
-    setCurrentCategoryId({ commit }, id) {
-      commit('setCurrentCategoryId', id);
     },
   },
 });
