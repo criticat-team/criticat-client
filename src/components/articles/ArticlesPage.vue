@@ -1,7 +1,7 @@
 <template>
   <section class="articles-page">
     <div class="pa-2 articles-widget__slider__item" v-for="(item, index) in items" :key="index">
-      <articles-widget-item :item="item" />
+      <articles-widget-item :loading="loading" :article="item" />
     </div>
   </section>
 </template>
@@ -31,14 +31,14 @@ export default defineComponent({
     );
 
     const items = computed(() =>
-      Array.from(Array(10).keys()).map((index) => ({
-        loading: loading.value,
-        article: result.value ? result.value.articles.items[index] : null,
-      })),
+      Array.from(Array(10).keys()).map((index) =>
+        result.value ? result.value.articles.items[index] : null,
+      ),
     );
 
     return {
       items,
+      loading,
       numberOfItems,
     };
   },

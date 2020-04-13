@@ -2,7 +2,7 @@
   <section class="articles-widget">
     <div class="articles-widget__slider d-flex overflow-x-auto hide-scrollbar">
       <div class="pa-2 articles-widget__slider__item" v-for="(item, index) in items" :key="index">
-        <articles-widget-item :item="item" />
+        <articles-widget-item :loading="loading" :article="item" />
       </div>
     </div>
     <div v-if="categoryArticlesRoute" class="mx-2 d-flex justify-end">
@@ -39,10 +39,9 @@ export default defineComponent({
     );
 
     const items = computed(() =>
-      Array.from(Array(10).keys()).map((index) => ({
-        loading: loading.value,
-        article: result.value ? result.value.articles.items[index] : null,
-      })),
+      Array.from(Array(10).keys()).map((index) =>
+        result.value ? result.value.articles.items[index] : null,
+      ),
     );
 
     const categoryArticlesRoute = computed(() =>
@@ -58,6 +57,7 @@ export default defineComponent({
 
     return {
       items,
+      loading,
       numberOfItems,
       categoryArticlesRoute,
     };

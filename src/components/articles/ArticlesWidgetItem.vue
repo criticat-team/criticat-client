@@ -1,16 +1,12 @@
 <template>
-  <v-skeleton-loader
-    :width="width"
-    :height="height"
-    type="image"
-    :loading="item.loading || !item.article"
-  >
-    <articles-widget-item-article :style="articleStyle" :article="item.article" />
+  <v-skeleton-loader :width="width" :height="height" type="image" :loading="loading || !article">
+    <articles-widget-item-article :style="articleStyle" :article="article" />
   </v-skeleton-loader>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import { Article } from '@/generated/graphql';
 import ArticlesWidgetItemArticle from './ArticlesWidgetItemArticle.vue';
 
 export default defineComponent({
@@ -18,7 +14,8 @@ export default defineComponent({
     ArticlesWidgetItemArticle,
   },
   props: {
-    item: Object,
+    article: Object as () => Article,
+    loading: Boolean,
   },
   setup() {
     const WIDTH = '256px';
