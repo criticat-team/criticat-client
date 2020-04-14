@@ -4,20 +4,21 @@
     :class="classes"
     @click="$emit('click', $event)"
     :points="points"
-    :fill="active ? color : 'rgba(255, 255, 255, 0.16)'"
+    :fill="color"
+    :style="style"
   >
   </polygon>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-export type Position = 'top' | 'right' | 'bottom' | 'left' | 'center';
+export type LogoItemPosition = 'top' | 'right' | 'bottom' | 'left' | 'center';
 
 export default defineComponent({
   props: {
     active: Boolean,
-    position: String as () => Position,
-    color: String as () => Position,
+    position: String as () => LogoItemPosition,
+    color: String,
   },
   setup(props, context) {
     const points = computed(() => {
@@ -40,14 +41,18 @@ export default defineComponent({
       'app-logo-item--clickable': context.listeners.click != null,
     }));
 
-    return { points, classes };
+    const style = computed(() => ({
+      opacity: props.active ? 1 : 0.3,
+    }));
+
+    return { points, classes, style };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .app-logo-item {
-  transition: fill 0.28s map-get($transition, 'ease-in-out');
+  transition: opacity 0.28s map-get($transition, 'ease-in-out');
 
   &--clickable {
     cursor: pointer;

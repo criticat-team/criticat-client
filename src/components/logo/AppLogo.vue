@@ -13,8 +13,14 @@
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
 import AppLogoContainer from './AppLogoContainer.vue';
+import { LogoItemPosition } from './AppLogoItem.vue';
 import AppLogoItem from './AppLogoItem.vue';
 import store from '@/store';
+
+type Item = {
+  color: string;
+  position: LogoItemPosition;
+};
 
 export default defineComponent({
   components: {
@@ -23,13 +29,13 @@ export default defineComponent({
   },
   setup() {
     const categories = computed(() => store.state.categories);
-    const items = computed(() => [
+    const items = computed((): Item[] => [
       ...Object.values(categories.value).map((category) => ({
         color: category.color,
-        position: category.position,
+        position: category.position as LogoItemPosition,
       })),
       {
-        color: 'white',
+        color: '#FFFFFF',
         position: 'center',
       },
     ]);

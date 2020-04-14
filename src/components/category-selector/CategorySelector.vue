@@ -10,7 +10,16 @@
 import { defineComponent, computed } from '@vue/composition-api';
 import AppLogoContainer from '@/components/logo/AppLogoContainer.vue';
 import AppLogoItem from '@/components/logo/AppLogoItem.vue';
+import { LogoItemPosition } from '@/components/logo/AppLogoItem.vue';
 import store from '@/store';
+import { Location } from 'vue-router';
+
+type Item = {
+  route: Location;
+  color: string;
+  position: LogoItemPosition;
+  active: boolean;
+};
 
 export default defineComponent({
   components: {
@@ -20,17 +29,16 @@ export default defineComponent({
   setup() {
     const currentCategory = computed(() => store.getters.currentCategory);
     const categories = computed(() => store.state.categories);
-    const items = computed(() => [
+    const items = computed((): Item[] => [
       ...Object.values(categories.value).map((category) => ({
         route: { name: 'category.home', params: { categoryId: category.id } },
         color: category.color,
-        icon: category.icon,
         position: category.position,
         active: currentCategory.value?.id === category.id,
       })),
       {
         route: { name: 'home' },
-        color: 'white',
+        color: '#FFFFFF',
         position: 'center',
         active: currentCategory.value == null,
       },

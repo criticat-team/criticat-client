@@ -4,6 +4,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
+import './plugins/vue-screen';
 import './plugins/composition-api';
 import { apolloClient } from './plugins/vue-apollo';
 import { provide } from '@vue/composition-api';

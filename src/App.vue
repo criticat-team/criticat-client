@@ -8,6 +8,9 @@
       :mini-variant="false"
       :expand-on-hover="false"
       mini-variant-width="80"
+      disable-resize-watcher
+      disable-router-watcher
+      stateless
     >
       <div class="my-3 mx-3">
         <v-text-field

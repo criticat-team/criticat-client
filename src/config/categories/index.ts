@@ -4,7 +4,7 @@ import tv from './tv';
 import games from './games';
 import books from './books';
 
-export const categories: CategoryMap = {
+const categories: CategoryMap = {
   movies,
   tv,
   books,
