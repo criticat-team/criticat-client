@@ -1,7 +1,7 @@
 <template>
-  <section class="articles-page">
+  <section>
     <div class="pa-2 articles-widget__slider__item" v-for="(item, index) in items" :key="index">
-      <articles-widget-item :item="item" />
+      <articles-widget-item :article="item" :loading="loading" />
     </div>
   </section>
 </template>
@@ -10,7 +10,7 @@
 import { defineComponent, computed, ref } from '@vue/composition-api';
 import { CategoryEnum } from '@/config/categories/types';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
-import { useGetArticlesQuery } from '@/generated/graphql';
+import { useGetArticlesQuery, Article } from '@/generated/graphql';
 
 export default defineComponent({
   props: {
@@ -30,22 +30,16 @@ export default defineComponent({
       }),
     );
 
-    const items = computed(() =>
-      Array.from(Array(10).keys()).map((index) => ({
-        loading: loading.value,
-        article: result.value ? result.value.articles.items[index] : null,
-      })),
+    const items = computed((): Article[] =>
+      Array.from(Array(numberOfItems).keys()).map((index) =>
+        result.value ? result.value.articles.items[index] : null,
+      ),
     );
 
     return {
       items,
-      numberOfItems,
+      loading,
     };
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.articles-page {
-}
-</style>

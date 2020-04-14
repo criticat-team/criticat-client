@@ -1,5 +1,5 @@
 <template>
-  <section class="articles-widget">
+  <section>
     <app-slider>
       <app-slider-item v-for="(item, index) in items" :key="index">
         <articles-widget-item :article="item" :loading="loading" />
@@ -62,7 +62,6 @@ export default defineComponent({
     return {
       items,
       loading,
-      numberOfItems,
       categoryArticlesRoute,
     };
   },
