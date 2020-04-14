@@ -86,7 +86,7 @@ export default defineComponent({
       const firstItemToShowStart = element.offsetLeft;
 
       const lastItemToShow = items.find((item, index) => {
-        if (index <= firstItemToShowIndex) {
+        if (index < firstItemToShowIndex) {
           return false;
         }
         if (index === items.length - 1) {
