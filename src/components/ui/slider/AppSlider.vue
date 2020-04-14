@@ -81,10 +81,31 @@ export default defineComponent({
     const showLeftButton = computed(() => visibleArea.value.start > 0);
     const showRightButton = computed(() => visibleArea.value.end < state.scrollWidth);
 
-    const scrollToElement = (element: Element) => {
+    const navigateTo = (items, element: HTMLElement) => {
+      const firstItemToShowIndex = items.indexOf(element);
+      const firstItemToShowStart = element.offsetLeft;
+
+      const lastItemToShow = items.find((item, index) => {
+        if (index <= firstItemToShowIndex) {
+          return false;
+        }
+        if (index === items.length - 1) {
+          return true;
+        }
+        const nextElementSibling = item.nextSibling as HTMLElement;
+        return (
+          nextElementSibling.offsetLeft + nextElementSibling.clientWidth >
+          firstItemToShowStart + state.clientWidth
+        );
+      });
+
+      const lastItemToShowEnd = lastItemToShow.offsetLeft + lastItemToShow.clientWidth;
+
+      const offset = -(state.clientWidth + firstItemToShowStart - lastItemToShowEnd) / 2;
+
       VueScrollTo.scrollTo(element, 300, {
         container: itemsContainerElement,
-        offset: -8,
+        offset,
         x: true,
         y: false,
       });
@@ -93,18 +114,24 @@ export default defineComponent({
     const navigatePrevious = () => {
       const items = [...itemsContainerElement.children] as HTMLElement[];
       const firstVisibleLeft = items.find((item) => item.offsetLeft >= visibleArea.value.start);
-      const target = items.find(
+      const firstItemToShow = items.find(
         (item) => item.offsetLeft + state.clientWidth >= firstVisibleLeft.offsetLeft,
       );
-      scrollToElement(target);
+      if (firstItemToShow != null) {
+        navigateTo(items, firstItemToShow);
+      }
     };
 
     const navigateNext = () => {
       const items = [...itemsContainerElement.children] as HTMLElement[];
-      const firstHiddenRight = items.find(
+
+      const firstItemToShow = items.find(
         (item) => item.offsetLeft + item.clientWidth >= visibleArea.value.end,
       );
-      scrollToElement(firstHiddenRight);
+
+      if (firstItemToShow != null) {
+        navigateTo(items, firstItemToShow);
+      }
     };
 
     onMounted(() => {
