@@ -18,7 +18,7 @@
               :elevation="2"
               v-text="article.origin.title"
             />
-            <v-fade-transition>
+            <v-fade-transition v-if="!isTouchScreen">
               <v-overlay opacity="0.8" v-if="hover" absolute>
                 <div v-text="article.title" class="pa-2 text-center white--text"></div>
               </v-overlay>
@@ -40,13 +40,15 @@ export default defineComponent({
   props: {
     article: Object as () => Article,
   },
-  setup(props) {
+  setup(props, context) {
+    const isTouchScreen = computed(() => context.root.$screen.touch);
+
     const category = computed(() =>
       props.article != null && props.article.categories != null
         ? store.state.categories[props.article.categories[0] as CategoryEnum]
         : null,
     );
-    return { category };
+    return { category, isTouchScreen };
   },
 });
 </script>
