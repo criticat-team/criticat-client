@@ -1,6 +1,6 @@
 <template>
   <section>
-    <app-slider>
+    <app-slider ref="sliderRef">
       <app-slider-item v-for="(item, index) in items" :key="index">
         <articles-widget-item :article="item" :loading="loading" />
       </app-slider-item>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from '@vue/composition-api';
+import { defineComponent, computed, ref, watch, Ref, onMounted } from '@vue/composition-api';
 import { Category } from '@/config/categories/types';
 import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
 import { useGetArticlesQuery, Article } from '@/generated/graphql';
@@ -32,7 +32,14 @@ export default defineComponent({
     AppSliderItem,
   },
   setup(props) {
-    const numberOfItems = 12;
+    const numberOfItems = 16;
+    const sliderRef: Ref<InstanceType<typeof AppSlider>> = ref(null);
+
+    onMounted(() => {
+      watch(() => props.category, sliderRef.value.resetScroll, {
+        lazy: false,
+      });
+    });
 
     const articlesCategory = computed(() => (props.category ? props.category.id : 'all'));
     const { result, loading } = useGetArticlesQuery(
@@ -63,6 +70,7 @@ export default defineComponent({
       items,
       loading,
       categoryArticlesRoute,
+      sliderRef,
     };
   },
 });
