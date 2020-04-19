@@ -71,6 +71,18 @@ export default defineComponent({
     CategorySelector,
     AppLogo,
   },
+  metaInfo() {
+    return {
+      titleTemplate: '%s | Criticat',
+      meta: [
+        {
+          hid: 'theme-color',
+          name: 'theme-color',
+          content: this.primaryColor,
+        },
+      ],
+    };
+  },
   setup(props, context) {
     const categories = store.state.categories;
 
@@ -79,17 +91,18 @@ export default defineComponent({
       store.commit.setCurrentCategoryId(currentCategoryId);
     });
 
-    // Change primary color based on category
     const currentCategory = computed(() => store.getters.currentCategory);
-    watch(currentCategory, (currentCategory) => {
-      context.root.$vuetify.theme.currentTheme.primary = currentCategory
-        ? currentCategory.color
-        : '#333333';
+    const primaryColor = computed(() =>
+      currentCategory.value ? currentCategory.value.color : '#333333',
+    );
+
+    watch(primaryColor, (primaryColor) => {
+      context.root.$vuetify.theme.currentTheme.primary = primaryColor;
     });
 
     const sections = computed(() => store.getters.currentCategorySections);
 
-    return { categories, currentCategory, mdiMagnify, sections };
+    return { categories, currentCategory, currentCategoryId, mdiMagnify, sections, primaryColor };
   },
 });
 </script>

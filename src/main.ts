@@ -6,6 +6,7 @@ import store from './store';
 import vuetify from './plugins/vuetify';
 import './plugins/vue-screen';
 import './plugins/composition-api';
+import './plugins/vue-meta';
 import { apolloClient } from './plugins/vue-apollo';
 import { provide } from '@vue/composition-api';
 import { DefaultApolloClient } from '@vue/apollo-composable';

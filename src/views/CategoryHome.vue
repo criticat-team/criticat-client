@@ -10,6 +10,11 @@ import ArticlesWidget from '@/components/articles/ArticlesWidget.vue';
 import store from '@/store';
 
 export default defineComponent({
+  metaInfo() {
+    return {
+      title: this.currentCategory ? this.currentCategory.id : undefined,
+    };
+  },
   components: {
     ArticlesWidget,
   },
