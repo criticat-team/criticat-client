@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <div class="d-flex flex-column fill-height">
     <div>
       <v-responsive width="100%" :aspect-ratio="16 / 9">
