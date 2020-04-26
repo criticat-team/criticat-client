@@ -1,5 +1,5 @@
 <template>
-  <div data-cy="view.home" class="my-2">
+  <div data-cy="view.home">
     <articles-widget />
   </div>
 </template>

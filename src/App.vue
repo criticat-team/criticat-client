@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-navigation-drawer
+      v-if="showDrawer"
       permanent
       app
       dark
       color="grey darken-4"
-      :mini-variant="false"
-      :expand-on-hover="false"
+      :mini-variant="drawerMiniVariant"
       mini-variant-width="80"
       disable-resize-watcher
       disable-router-watcher
@@ -84,6 +84,9 @@ export default defineComponent({
     };
   },
   setup(props, context) {
+    const showDrawer = computed(() => context.root.$vuetify.breakpoint.smAndUp);
+    const drawerMiniVariant = computed(() => context.root.$vuetify.breakpoint.smOnly);
+
     const categories = store.state.categories;
 
     const currentCategoryId = computed(() => context.root.$route.params.categoryId);
@@ -102,7 +105,16 @@ export default defineComponent({
 
     const sections = computed(() => store.getters.currentCategorySections);
 
-    return { categories, currentCategory, currentCategoryId, mdiMagnify, sections, primaryColor };
+    return {
+      showDrawer,
+      drawerMiniVariant,
+      categories,
+      currentCategory,
+      currentCategoryId,
+      mdiMagnify,
+      sections,
+      primaryColor,
+    };
   },
 });
 </script>
