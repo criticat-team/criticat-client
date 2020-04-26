@@ -7,8 +7,10 @@ query getArticles($category: String!, $itemsPerPage: Int, $continuation: String)
       url
       origin {
         title
+        iconUrl
       }
       categories
+      content
     }
     continuation
   }

@@ -1,8 +1,14 @@
 <template>
-  <section>
+  <section class="py-2">
     <app-slider ref="sliderRef">
       <app-slider-item v-for="(item, index) in items" :key="index">
-        <articles-widget-item :article="item" :loading="loading" />
+        <div style="width: 256px; height: 144px;">
+          <articles-article-small
+            @click="openDialog(index)"
+            :article="item.article"
+            :loading="item.loading"
+          />
+        </div>
       </app-slider-item>
     </app-slider>
     <div v-if="categoryArticlesRoute" class="mx-2 d-flex justify-end">
@@ -10,24 +16,32 @@
         Show more
       </v-btn>
     </div>
+    <articles-dialog v-if="!loading" ref="dialogRef" :items="items" />
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch, Ref, onMounted } from '@vue/composition-api';
 import { Category } from '@/config/categories/types';
-import ArticlesWidgetItem from './ArticlesWidgetItem.vue';
+import ArticlesArticleSmall from './article/small/ArticlesArticleSmall.vue';
+import ArticlesDialog from './ArticlesDialog.vue';
 import { useGetArticlesQuery, Article } from '@/generated/graphql';
 import { CATEGORY__ARTICLES } from '@/router/constants';
 import AppSlider from '@/components/ui/slider/AppSlider.vue';
 import AppSliderItem from '@/components/ui/slider/AppSliderItem.vue';
+
+type Item = {
+  article: Article;
+  loading: boolean;
+};
 
 export default defineComponent({
   props: {
     category: Object as () => Category,
   },
   components: {
-    ArticlesWidgetItem,
+    ArticlesDialog,
+    ArticlesArticleSmall,
     AppSlider,
     AppSliderItem,
   },
@@ -49,10 +63,11 @@ export default defineComponent({
       }),
     );
 
-    const items = computed((): Article[] =>
-      Array.from(Array(numberOfItems).keys()).map((index) =>
-        result.value ? result.value.articles.items[index] : null,
-      ),
+    const items = computed((): Item[] =>
+      Array.from(Array(numberOfItems).keys()).map((index) => ({
+        article: result.value ? result.value.articles.items[index] : null,
+        loading: loading.value,
+      })),
     );
 
     const categoryArticlesRoute = computed(() =>
@@ -66,11 +81,18 @@ export default defineComponent({
         : null,
     );
 
+    const dialogRef: Ref<InstanceType<typeof ArticlesDialog>> = ref(null);
+    const openDialog = (index: number) => {
+      dialogRef.value.openArticle(index);
+    };
+
     return {
       items,
       loading,
       categoryArticlesRoute,
       sliderRef,
+      openDialog,
+      dialogRef,
     };
   },
 });
