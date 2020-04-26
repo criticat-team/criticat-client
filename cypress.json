@@ -1,0 +1,4 @@
+{
+  "projectId": "criticat-client",
+  "pluginsFile": "tests/e2e/plugins/index.js"
+}
