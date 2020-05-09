@@ -4,6 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import { mdiMagnify } from '@mdi/js';
 
-export default defineComponent({});
+export default defineComponent({
+  setup() {
+    return {
+      mdiMagnify,
+    };
+  },
+});
 </script>
