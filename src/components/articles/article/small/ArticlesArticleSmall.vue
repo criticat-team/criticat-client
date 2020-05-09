@@ -1,8 +1,8 @@
 <template>
-  <div class="fill-height">
+  <article class="fill-height">
     <articles-article-small-skeleton v-if="loading" type="image" />
     <articles-article-small-content v-else @click="$emit('click', $event)" :article="article" />
-  </div>
+  </article>
 </template>
 
 <script lang="ts">

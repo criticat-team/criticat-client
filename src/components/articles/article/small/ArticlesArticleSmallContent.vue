@@ -1,39 +1,36 @@
 <template>
-  <article>
-    <v-card
-      @click.prevent="$emit('click', $event)"
-      class="d-flex fill-height"
-      :href="article.url"
-      target="_blank"
-    >
-      <v-hover>
-        <template v-slot:default="{ hover }">
-          <v-img
-            :aspect-ratio="16 / 9"
-            :src="article.image || 'https://via.placeholder.com/256x144.png'"
-            :lazy-src="'https://via.placeholder.com/256x144.png'"
-            cover
-          >
-            <v-sheet
-              v-if="category"
-              :height="22"
-              tile
-              :color="category.color"
-              class="overline white--text px-2 py-1"
-              style="border-radius: 0 0 4px 0; position: absolute;"
-              :elevation="2"
-              v-text="article.origin.title"
-            />
-            <v-fade-transition v-if="!isTouchScreen">
-              <v-overlay opacity="0.8" v-if="hover" absolute>
-                <div v-text="article.title" class="pa-2 text-center white--text"></div>
-              </v-overlay>
-            </v-fade-transition>
-          </v-img>
-        </template>
-      </v-hover>
-    </v-card>
-  </article>
+  <v-card
+    @click.prevent="$emit('click', $event)"
+    class="d-flex fill-height"
+    :href="article.url"
+    target="_blank"
+  >
+    <v-hover>
+      <template v-slot:default="{ hover }">
+        <v-img
+          :aspect-ratio="16 / 9"
+          :src="article.image || imagePlaceholder"
+          :lazy-src="imagePlaceholder"
+          cover
+        >
+          <v-sheet
+            v-if="category"
+            tile
+            :color="category.color"
+            class="overline white--text px-2 py-1 rounded-br"
+            style="position: absolute;"
+            :elevation="2"
+            v-text="article.origin.title"
+          />
+          <v-fade-transition v-if="!isTouchScreen">
+            <v-overlay opacity="0.8" v-if="hover" absolute>
+              <div v-text="article.title" class="pa-2 text-center white--text"></div>
+            </v-overlay>
+          </v-fade-transition>
+        </v-img>
+      </template>
+    </v-hover>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -54,7 +51,11 @@ export default defineComponent({
         ? store.state.categories[props.article.categories[0] as CategoryEnum]
         : null,
     );
-    return { category, isTouchScreen };
+
+    const imagePlaceholder =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN88B8AAsUB4ZtvXtIAAAAASUVORK5CYII=';
+
+    return { category, isTouchScreen, imagePlaceholder };
   },
 });
 </script>

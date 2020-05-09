@@ -3,8 +3,8 @@
     <div>
       <v-img
         :aspect-ratio="16 / 9"
-        :src="article.image || 'https://via.placeholder.com/256x144.png'"
-        :lazy-src="'https://via.placeholder.com/256x144.png'"
+        :src="article.image || imagePlaceholder"
+        :lazy-src="imagePlaceholder"
       ></v-img>
     </div>
     <v-card-subtitle class="pb-0 d-flex align-center">
@@ -41,7 +41,11 @@ export default defineComponent({
         ? store.state.categories[props.article.categories[0] as CategoryEnum]
         : null,
     );
-    return { category };
+
+    const imagePlaceholder =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN88B8AAsUB4ZtvXtIAAAAASUVORK5CYII=';
+
+    return { category, imagePlaceholder };
   },
 });
 </script>

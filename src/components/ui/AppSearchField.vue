@@ -1,5 +1,5 @@
 <template>
-  <v-skeleton-loader width="100%" height="100%" type="image" />
+  <v-text-field flat solo-inverted hide-details :prepend-inner-icon="mdiMagnify" label="Search" />
 </template>
 
 <script lang="ts">
