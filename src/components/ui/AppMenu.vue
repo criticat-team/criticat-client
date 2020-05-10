@@ -20,15 +20,9 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-import CategorySelector from '@/components/category-selector/CategorySelector.vue';
-import AppLogo from '@/components/logo/AppLogo.vue';
 import store from '@/store';
 
 export default defineComponent({
-  components: {
-    CategorySelector,
-    AppLogo,
-  },
   setup() {
     const currentCategory = computed(() => store.getters.currentCategory);
     const sections = computed(() => store.getters.currentCategorySections);
