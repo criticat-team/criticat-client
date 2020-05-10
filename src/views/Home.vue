@@ -9,8 +9,10 @@ import { defineComponent } from '@vue/composition-api';
 import ArticlesWidget from '@/components/articles/ArticlesWidget.vue';
 
 export default defineComponent({
-  metaInfo: {
-    title: 'Home',
+  metaInfo() {
+    return {
+      title: 'Home',
+    };
   },
   components: {
     ArticlesWidget,

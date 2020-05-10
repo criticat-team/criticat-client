@@ -10,6 +10,11 @@ import ArticlesGrid from '@/components/articles/ArticlesGrid.vue';
 import store from '@/store';
 
 export default defineComponent({
+  metaInfo() {
+    return {
+      title: `${this.currentCategory.id} articles`,
+    };
+  },
   components: {
     ArticlesGrid,
   },
