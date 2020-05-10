@@ -16,7 +16,18 @@
         Show more
       </v-btn>
     </div>
-    <articles-dialog v-if="!loading" ref="dialogRef" :items="items" />
+    <app-dialog-slider v-if="showDialog" v-model="dialogVisibleItem" @close="closeDialog">
+      <app-dialog-slider-item v-for="(item, index) in items" :key="index">
+        <articles-article-full :article="item.article" :loading="item.loading" />
+      </app-dialog-slider-item>
+      <app-dialog-slider-item v-if="categoryArticlesRoute">
+        <v-card dark class="d-flex fill-height align-center justify-center">
+          <v-btn color="primary" :to="categoryArticlesRoute">
+            Show more
+          </v-btn>
+        </v-card>
+      </app-dialog-slider-item>
+    </app-dialog-slider>
   </section>
 </template>
 
@@ -24,7 +35,9 @@
 import { defineComponent, computed, ref, watch, Ref, onMounted } from '@vue/composition-api';
 import { Category } from '@/config/categories/types';
 import ArticlesArticleSmall from './article/small/ArticlesArticleSmall.vue';
-import ArticlesDialog from './ArticlesDialog.vue';
+import ArticlesArticleFull from './article/full/ArticlesArticleFull.vue';
+import AppDialogSlider from '@/components/ui/dialog-slider/AppDialogSlider.vue';
+import AppDialogSliderItem from '@/components/ui/dialog-slider/AppDialogSliderItem.vue';
 import { useGetArticlesQuery, Article } from '@/generated/graphql';
 import { CATEGORY__ARTICLES } from '@/router/constants';
 import AppSlider from '@/components/ui/slider/AppSlider.vue';
@@ -40,8 +53,10 @@ export default defineComponent({
     category: Object as () => Category,
   },
   components: {
-    ArticlesDialog,
+    AppDialogSlider,
+    AppDialogSliderItem,
     ArticlesArticleSmall,
+    ArticlesArticleFull,
     AppSlider,
     AppSliderItem,
   },
@@ -81,9 +96,16 @@ export default defineComponent({
         : null,
     );
 
-    const dialogRef: Ref<InstanceType<typeof ArticlesDialog>> = ref(null);
-    const openDialog = (index: number) => {
-      dialogRef.value.openArticle(index);
+    // Dialog
+    const dialogVisibleItem: Ref<number> = ref(null);
+    const showDialog: Ref<boolean> = ref(false);
+    const openDialog = (index) => {
+      showDialog.value = true;
+      dialogVisibleItem.value = index;
+    };
+    const closeDialog = () => {
+      showDialog.value = false;
+      dialogVisibleItem.value = null;
     };
 
     return {
@@ -92,7 +114,9 @@ export default defineComponent({
       categoryArticlesRoute,
       sliderRef,
       openDialog,
-      dialogRef,
+      closeDialog,
+      showDialog,
+      dialogVisibleItem,
     };
   },
 });

@@ -14,16 +14,27 @@
       </v-col>
     </v-row>
     <div v-intersect="{ handler: onIntersect, options: intersectOptions }"></div>
-    <articles-dialog v-if="!loading" ref="dialogRef" :items="items" />
+    <app-dialog-slider
+      :total="items.length"
+      v-if="showDialog"
+      v-model="dialogVisibleItem"
+      @close="closeDialog"
+    >
+      <app-dialog-slider-item v-for="(item, index) in items" :key="index">
+        <articles-article-full :article="item.article" :loading="item.loading" />
+      </app-dialog-slider-item>
+    </app-dialog-slider>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref, Ref, watch } from '@vue/composition-api';
 import { CategoryEnum } from '@/config/categories/types';
-import ArticlesArticleSmall from './article/small/ArticlesArticleSmall.vue';
 import { useGetArticlesQuery, Article } from '@/generated/graphql';
-import ArticlesDialog from './ArticlesDialog.vue';
+import ArticlesArticleSmall from './article/small/ArticlesArticleSmall.vue';
+import ArticlesArticleFull from './article/full/ArticlesArticleFull.vue';
+import AppDialogSlider from '@/components/ui/dialog-slider/AppDialogSlider.vue';
+import AppDialogSliderItem from '@/components/ui/dialog-slider/AppDialogSliderItem.vue';
 
 const ITEMS_PER_PAGE = 64;
 type Item = {
@@ -36,8 +47,10 @@ export default defineComponent({
     categoryId: String as () => CategoryEnum,
   },
   components: {
+    AppDialogSlider,
+    AppDialogSliderItem,
     ArticlesArticleSmall,
-    ArticlesDialog,
+    ArticlesArticleFull,
   },
   setup(props) {
     const numberOfPages = ref(1);
@@ -106,18 +119,31 @@ export default defineComponent({
     });
 
     // Dialog
-    const dialogRef: Ref<InstanceType<typeof ArticlesDialog>> = ref(null);
-    const openDialog = (index: number) => {
-      dialogRef.value.openArticle(index);
+    const dialogVisibleItem: Ref<number> = ref(null);
+    const showDialog: Ref<boolean> = ref(false);
+    const openDialog = (index) => {
+      showDialog.value = true;
+      dialogVisibleItem.value = index;
     };
+    const closeDialog = () => {
+      showDialog.value = false;
+      dialogVisibleItem.value = null;
+    };
+    watch(dialogVisibleItem, (index) => {
+      if (index > items.value.length - 3) {
+        numberOfPages.value = numberOfPages.value + 1;
+      }
+    });
 
     return {
       items,
       loading,
-      openDialog,
-      dialogRef,
       onIntersect,
       intersectOptions,
+      openDialog,
+      closeDialog,
+      showDialog,
+      dialogVisibleItem,
     };
   },
 });
