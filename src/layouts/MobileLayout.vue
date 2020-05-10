@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      stateless
+      disable-route-watcher
       v-model="showDrawer"
       dark
       fixed
