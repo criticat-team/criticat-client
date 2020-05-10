@@ -1,6 +1,13 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="showDrawer" dark fixed color="grey darken-4" width="100%">
+    <v-navigation-drawer
+      stateless
+      v-model="showDrawer"
+      dark
+      fixed
+      color="grey darken-4"
+      width="100%"
+    >
       <div class="my-3 mx-3">
         <app-search-field />
       </div>
@@ -52,7 +59,9 @@ export default defineComponent({
       () => context.root.$route,
       () => {
         if (showDrawer.value) {
-          showDrawer.value = false;
+          setTimeout(() => {
+            showDrawer.value = false;
+          }, 350);
         }
       },
     );
