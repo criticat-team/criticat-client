@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import * as VueApolloComposable from '@vue/apollo-composable';
 import * as VueCompositionApi from '@vue/composition-api';
 export type Maybe<T> = T | null;
+export type ReactiveFunction<TParam> = () => TParam;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -228,10 +229,10 @@ export type GetArticlesQuery = (
     & Pick<ArticlesStream, 'continuation'>
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Article' }
-      & Pick<Article, 'id' | 'title' | 'image' | 'url' | 'categories'>
+      & Pick<Article, 'id' | 'title' | 'image' | 'url' | 'categories' | 'content'>
       & { origin?: Maybe<(
         { __typename?: 'ArticleOrigin' }
-        & Pick<ArticleOrigin, 'title'>
+        & Pick<ArticleOrigin, 'title' | 'iconUrl'>
       )> }
     )>>> }
   )> }
@@ -248,8 +249,10 @@ export const GetArticlesDocument = gql`
       url
       origin {
         title
+        iconUrl
       }
       categories
+      content
     }
     continuation
   }
@@ -263,7 +266,7 @@ export const GetArticlesDocument = gql`
  * When your component renders, `useGetArticlesQuery` returns an object from Apollo Client that contains result, loading and error properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
  *
  * @example
  * const { result, loading, error } = useGetArticlesQuery(
@@ -274,8 +277,7 @@ export const GetArticlesDocument = gql`
  *   }
  * );
  */
-type ReactiveFunctionGetArticlesQuery = () => GetArticlesQueryVariables
-export function useGetArticlesQuery(variables: GetArticlesQueryVariables | VueCompositionApi.Ref<GetArticlesQueryVariables> | ReactiveFunctionGetArticlesQuery, baseOptions?: VueApolloComposable.UseQueryOptions<GetArticlesQuery, GetArticlesQueryVariables>) {
-          return VueApolloComposable.useQuery<GetArticlesQuery, GetArticlesQueryVariables>(GetArticlesDocument, variables, baseOptions);
-        }
-export type GetArticlesQueryCompositionFunctionResult = ReturnType<typeof useGetArticlesQuery>;
+export function useGetArticlesQuery(variables: GetArticlesQueryVariables | VueCompositionApi.Ref<GetArticlesQueryVariables> | ReactiveFunction<GetArticlesQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetArticlesQuery, GetArticlesQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetArticlesQuery, GetArticlesQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetArticlesQuery, GetArticlesQueryVariables>> = {}) {
+            return VueApolloComposable.useQuery<GetArticlesQuery, GetArticlesQueryVariables>(GetArticlesDocument, variables, options);
+          }
+export type GetArticlesQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetArticlesQuery, GetArticlesQueryVariables>;

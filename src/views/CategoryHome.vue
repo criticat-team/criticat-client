@@ -1,5 +1,5 @@
 <template>
-  <div data-cy="view.category-home" class="my-2">
+  <div data-cy="view.category-home">
     <articles-widget :category="currentCategory" />
   </div>
 </template>

@@ -2,30 +2,30 @@
   <div class="app-slider-buttons">
     <v-fade-transition>
       <v-btn
-        class="app-slider-buttons__button primary--text"
-        :class="{ 'app-slider__button--hidden': !hover }"
+        class="app-slider-buttons__button"
+        :class="{ 'app-slider-buttons__button--hidden': !hover }"
         v-show="showLeftButton"
         absolute
+        dark
         left
-        small
-        fab
+        icon
         @click="navigatePrevious"
       >
-        <v-icon>{{ mdiChevronLeft }}</v-icon>
+        <v-icon large>{{ mdiChevronLeft }}</v-icon>
       </v-btn>
     </v-fade-transition>
     <v-fade-transition>
       <v-btn
-        class="app-slider-buttons__button primary--text"
+        class="app-slider-buttons__button"
         :class="{ 'app-slider-buttons__button--hidden': !hover }"
         v-show="showRightButton"
         absolute
+        dark
         right
-        small
-        fab
+        icon
         @click="navigateNext"
       >
-        <v-icon>{{ mdiChevronRight }}</v-icon>
+        <v-icon large>{{ mdiChevronRight }}</v-icon>
       </v-btn>
     </v-fade-transition>
   </div>
@@ -34,7 +34,8 @@
 <script lang="ts">
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import { defineComponent, Ref, ref, onMounted } from '@vue/composition-api';
-import { useSliderButtons } from './use/slider-buttons';
+import VueScrollTo from 'vue-scrollto';
+import useScrollState from '@/use/scroll-state';
 
 export default defineComponent({
   props: {
@@ -49,14 +50,76 @@ export default defineComponent({
       )[0] as HTMLElement;
     });
 
-    const { showRightButton, showLeftButton, navigateNext, navigatePrevious } = useSliderButtons(
-      containerElement,
-    );
+    const {
+      clientWidth,
+      visibleAreaStart,
+      visibleAreaEnd,
+      canScrollLeft,
+      canScrollRight,
+    } = useScrollState(containerElement);
+
+    const navigateTo = (items: HTMLElement[], element: HTMLElement) => {
+      const firstItemToShowIndex = items.indexOf(element);
+      const firstItemToShowStart = element.offsetLeft;
+
+      const lastItemToShow = items.find((item, index) => {
+        if (index < firstItemToShowIndex) {
+          return false;
+        }
+        if (index === items.length - 1) {
+          return true;
+        }
+        const nextElementSibling = item.nextSibling as HTMLElement;
+        return (
+          nextElementSibling.offsetLeft + nextElementSibling.clientWidth >
+          firstItemToShowStart + clientWidth.value
+        );
+      });
+
+      const lastItemToShowEnd = lastItemToShow.offsetLeft + lastItemToShow.clientWidth;
+
+      const offset = -(clientWidth.value + firstItemToShowStart - lastItemToShowEnd) / 2;
+
+      VueScrollTo.scrollTo(element, 300, {
+        container: containerElement.value,
+        offset,
+        x: true,
+        y: false,
+      });
+    };
+
+    const getItems = (): HTMLElement[] => {
+      return [...containerElement.value.children] as HTMLElement[];
+    };
+
+    const navigatePrevious = () => {
+      const items = getItems();
+      const firstVisibleLeft = items.find((item) => item.offsetLeft >= visibleAreaStart.value);
+      const firstItemToShow = items.find(
+        (item) => item.offsetLeft + clientWidth.value >= firstVisibleLeft.offsetLeft,
+      );
+      if (firstItemToShow != null) {
+        navigateTo(items, firstItemToShow);
+      }
+    };
+
+    const navigateNext = () => {
+      const items = getItems();
+
+      const firstItemToShow = items.find(
+        (item) => item.offsetLeft + item.clientWidth >= visibleAreaEnd.value,
+      );
+
+      if (firstItemToShow != null) {
+        navigateTo(items, firstItemToShow);
+      }
+    };
+
     return {
       mdiChevronLeft,
       mdiChevronRight,
-      showRightButton,
-      showLeftButton,
+      showRightButton: canScrollRight,
+      showLeftButton: canScrollLeft,
       navigateNext,
       navigatePrevious,
     };
@@ -67,8 +130,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .app-slider-buttons {
   &__button {
-    opacity: 0.8;
     top: calc(50% - 20px);
+    background: rgba(0, 0, 0, 0.3);
 
     &--hidden {
       opacity: 0;
