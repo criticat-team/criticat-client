@@ -66,8 +66,11 @@ export default defineComponent({
     const loadPagesUntilCovered = () => {
       if (needsMorePages.value) {
         numberOfPages.value++;
-        setTimeout(() => {
-          loadPagesUntilCovered();
+        // https://stackoverflow.com/questions/44145740/how-does-double-requestanimationframe-work
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            loadPagesUntilCovered();
+          });
         });
       }
     };
