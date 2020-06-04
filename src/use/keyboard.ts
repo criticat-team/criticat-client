@@ -6,7 +6,7 @@ type Bindings = {
   [k in Key]?: () => void;
 };
 
-export function useKeyboard(bindings: Bindings, eventType: EventType = 'keyup') {
+export function useKeyboard(bindings: Bindings, eventType: EventType = 'keyup'): void {
   useEventListener(eventType, (event: KeyboardEvent) => {
     if (bindings[event.key] != null) {
       bindings[event.key]();

@@ -15,7 +15,7 @@ export type Scalars = {
 };
 
 export type Article = {
-   __typename?: 'Article';
+  __typename?: 'Article';
   id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   published?: Maybe<Scalars['Int']>;
@@ -32,18 +32,18 @@ export type Article = {
 };
 
 export type ArticleAlternate = {
-   __typename?: 'ArticleAlternate';
+  __typename?: 'ArticleAlternate';
   href?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
 export type ArticleCanonical = {
-   __typename?: 'ArticleCanonical';
+  __typename?: 'ArticleCanonical';
   href?: Maybe<Scalars['String']>;
 };
 
 export type ArticleOrigin = {
-   __typename?: 'ArticleOrigin';
+  __typename?: 'ArticleOrigin';
   id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   categories?: Maybe<Array<Maybe<ArticleOriginCategory>>>;
@@ -53,25 +53,25 @@ export type ArticleOrigin = {
 };
 
 export type ArticleOriginCategory = {
-   __typename?: 'ArticleOriginCategory';
+  __typename?: 'ArticleOriginCategory';
   id?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
 };
 
 export type ArticlesStream = {
-   __typename?: 'ArticlesStream';
+  __typename?: 'ArticlesStream';
   items?: Maybe<Array<Maybe<Article>>>;
   continuation?: Maybe<Scalars['String']>;
 };
 
 export type ArticleSummary = {
-   __typename?: 'ArticleSummary';
+  __typename?: 'ArticleSummary';
   direction?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
 };
 
 export type Book = {
-   __typename?: 'Book';
+  __typename?: 'Book';
   title?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
 };
@@ -82,7 +82,7 @@ export enum CacheControlScope {
 }
 
 export type LiveStream = {
-   __typename?: 'LiveStream';
+  __typename?: 'LiveStream';
   id?: Maybe<Scalars['ID']>;
   gameId?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
@@ -97,13 +97,13 @@ export type LiveStream = {
 };
 
 export type LiveStreams = {
-   __typename?: 'LiveStreams';
+  __typename?: 'LiveStreams';
   items?: Maybe<Array<Maybe<LiveStream>>>;
   continuation?: Maybe<Scalars['String']>;
 };
 
 export type Movie = {
-   __typename?: 'Movie';
+  __typename?: 'Movie';
   id?: Maybe<Scalars['ID']>;
   adult?: Maybe<Scalars['Boolean']>;
   backdropPath?: Maybe<Scalars['String']>;
@@ -130,7 +130,7 @@ export type Movie = {
 };
 
 export type MovieCollection = {
-   __typename?: 'MovieCollection';
+  __typename?: 'MovieCollection';
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   posterPath?: Maybe<Scalars['String']>;
@@ -138,13 +138,13 @@ export type MovieCollection = {
 };
 
 export type MovieGenre = {
-   __typename?: 'MovieGenre';
+  __typename?: 'MovieGenre';
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type MovieImage = {
-   __typename?: 'MovieImage';
+  __typename?: 'MovieImage';
   filePath?: Maybe<Scalars['String']>;
   aspectRatio?: Maybe<Scalars['Float']>;
   height?: Maybe<Scalars['Int']>;
@@ -155,13 +155,13 @@ export type MovieImage = {
 };
 
 export type MovieImages = {
-   __typename?: 'MovieImages';
+  __typename?: 'MovieImages';
   backdrops?: Maybe<Array<Maybe<MovieImage>>>;
   posters?: Maybe<Array<Maybe<MovieImage>>>;
 };
 
 export type MovieProductionCompany = {
-   __typename?: 'MovieProductionCompany';
+  __typename?: 'MovieProductionCompany';
   name?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   logoPath?: Maybe<Scalars['String']>;
@@ -169,13 +169,13 @@ export type MovieProductionCompany = {
 };
 
 export type MovieProductionCountry = {
-   __typename?: 'MovieProductionCountry';
+  __typename?: 'MovieProductionCountry';
   iso_3166_1?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type MovieRatings = {
-   __typename?: 'MovieRatings';
+  __typename?: 'MovieRatings';
   tmdb?: Maybe<Scalars['String']>;
   imdb?: Maybe<Scalars['String']>;
   rottenTomatoes?: Maybe<Scalars['String']>;
@@ -183,13 +183,13 @@ export type MovieRatings = {
 };
 
 export type MovieSpokenLanguage = {
-   __typename?: 'MovieSpokenLanguage';
+  __typename?: 'MovieSpokenLanguage';
   iso_639_1?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
-   __typename?: 'Query';
+  __typename?: 'Query';
   books?: Maybe<Array<Maybe<Book>>>;
   articles?: Maybe<ArticlesStream>;
   movie?: Maybe<Movie>;

@@ -1,7 +1,17 @@
 import { computed, onMounted, Ref, ref, onUnmounted } from '@vue/composition-api';
 import Vue from 'vue';
 
-export function useScrollState(target: Ref<HTMLElement>) {
+export function useScrollState(
+  target: Ref<HTMLElement>,
+): {
+  scrollPosition: Ref<number>;
+  scrollWidth: Ref<number>;
+  clientWidth: Ref<number>;
+  visibleAreaStart: Ref<number>;
+  visibleAreaEnd: Ref<number>;
+  canScrollLeft: Ref<boolean>;
+  canScrollRight: Ref<boolean>;
+} {
   const scrollPosition: Ref<number> = ref(null);
   const scrollWidth: Ref<number> = ref(null);
   const clientWidth: Ref<number> = ref(null);
